@@ -37,7 +37,6 @@ public class UserController {
 		User user = userService.findUserById(id);
 		System.out.println(id);
 		System.out.println(user);
-//		test
 		return user;
 	}
 }
