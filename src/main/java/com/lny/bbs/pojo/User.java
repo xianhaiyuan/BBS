@@ -1,61 +1,106 @@
 package com.lny.bbs.pojo;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class User {
-    private Integer id;
-
+public class User implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer id;
     private String username;
-
-    private Date birthday;
-
+    private String passwd;
+    private String grade;
+    private String email;
+    private String nickname;
+    private String birthday;
     private String sex;
+    private Integer accuse;  
+    private Integer ban;
+    private Integer position;
+    private Integer online;
 
-    private String address;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
-
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public Integer getAccuse() {
+		return accuse;
+	}
+	public void setAccuse(Integer accuse) {
+		this.accuse = accuse;
+	}
+	public Integer getBan() {
+		return ban;
+	}
+	public void setBan(Integer ban) {
+		this.ban = ban;
+	}
+	public Integer getPosition() {
+		return position;
+	}
+	public void setPosition(Integer position) {
+		this.position = position;
+	}
+	public Integer getOnline() {
+		return online;
+	}
+	public void setOnline(Integer online) {
+		this.online = online;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPasswd() {
+		return passwd;
+	}
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", birthday=" + birthday + ", sex=" + sex + ", address="
-				+ address + "]";
+		return "User [id=" + id + ", username=" + username + ", passwd=" + passwd + ", grade=" + grade + ", email="
+				+ email + ", nickname=" + nickname + ", birthday=" + birthday + ", sex=" + sex + ", accuse=" + accuse
+				+ ", ban=" + ban + ", position=" + position + ", online=" + online + "]";
 	}
+    
+
 }

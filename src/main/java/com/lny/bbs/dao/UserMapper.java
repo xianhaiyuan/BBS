@@ -4,6 +4,6 @@ import com.lny.bbs.pojo.User;
 
 public interface UserMapper {
 
-    User selectByUserId(Integer id);
+	Integer insertUserMapper(User user);
 
 }
