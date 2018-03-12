@@ -2,6 +2,7 @@ package com.lny.bbs.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -30,8 +31,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login/get",method= {RequestMethod.GET})
-	public @ResponseBody User login(String username, String passwd) throws IllegalStateException, IOException {
-		return userService.getUser(username, passwd);
+	public @ResponseBody User login(Map<String ,Object> map) throws IllegalStateException, IOException {
+		return userService.getUser(map);
 	}
 	
 //	@RequestMapping(value="/user",method= {RequestMethod.POST})

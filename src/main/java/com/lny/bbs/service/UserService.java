@@ -1,8 +1,10 @@
 package com.lny.bbs.service;
 
+import java.util.Map;
+
 import com.lny.bbs.pojo.User;
 
 public interface UserService {
 	public Integer insertUser(User user);
-	public User getUser(String username, String passwd);
+	public User getUser(Map<String ,Object> map);
 }
