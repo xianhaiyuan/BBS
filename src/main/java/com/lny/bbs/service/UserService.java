@@ -5,6 +5,10 @@ import java.util.Map;
 import com.lny.bbs.pojo.User;
 
 public interface UserService {
-	public Integer insertUser(User user);
-	public User getUser(Map<String ,Object> map);
+	public Integer addUser(User user);
+	public User queryUser(String username, String passwd);
+	public Integer changeUserSetting(User user);
+	public User getUserById(Integer id);
+	public void setOnline(Integer id);
+	public Integer setUnOnline(Integer id);
 }

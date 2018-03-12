@@ -19,6 +19,8 @@ public class User implements Serializable {
     private Integer ban;
     private Integer position;
     private Integer online;
+    private String avatar;
+    private Integer article_count;
 
 	public Integer getId() {
 		return id;
@@ -99,7 +101,20 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", passwd=" + passwd + ", grade=" + grade + ", email="
 				+ email + ", nickname=" + nickname + ", birthday=" + birthday + ", sex=" + sex + ", accuse=" + accuse
-				+ ", ban=" + ban + ", position=" + position + ", online=" + online + "]";
+				+ ", ban=" + ban + ", position=" + position + ", online=" + online + ", avatar=" + avatar
+				+ ", article_count=" + article_count + "]";
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	public Integer getArticle_count() {
+		return article_count;
+	}
+	public void setArticle_count(Integer article_count) {
+		this.article_count = article_count;
 	}
     
 

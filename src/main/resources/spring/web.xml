@@ -56,5 +56,8 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	<listener>
+		<listener-class>com.lny.bbs.listener.SessionListener</listener-class>
+	</listener>
   
 </web-app>

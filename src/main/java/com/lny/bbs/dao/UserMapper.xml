@@ -2,10 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lny.bbs.dao.UserMapper" >
 	<insert id="insertUser" parameterType="User">
-		INSERT INTO `bbs_user`(username,passwd,grade,email,nickname,birthday,sex) 
-		VALUES(#{username},#{passwd},#{grade},#{email},#{nickname},#{birthday},#{sex})
+		insert into bbs_user(username,passwd,grade,email,nickname,birthday,sex) 
+		values(#{username},#{passwd},#{grade},#{email},#{nickname},#{birthday},#{sex})
 	</insert>
-	<select id="getUser" resultType="User">
-		SELECT * FROM `bbs_user` WHERE username = #{username} and passwd = #{passwd}
+	<select id="selectUserByUsername_passwd" resultType="User">
+		select * from bbs_user where username = #{0} and passwd = #{1}
 	</select>
+	<update id="updateUserSetting">
+		update bbs_user
+		<set>
+			<if test="nickname != null">
+				nickname = #{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="grade != null">
+				grade = #{grade,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="avatar != null">
+				avatar = #{avatar,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectUserById" parameterType="Integer" resultType="User">
+		select * from bbs_user where id = #{id}
+	</select>
+	<update id="updateOnline">
+		update bbs_user set online = 1 where id = #{id}
+	</update>
+	<update id="updateUnOnline">
+		update bbs_user set online = 0 where id = #{id}
+	</update>
 </mapper>
