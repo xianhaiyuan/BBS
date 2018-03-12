@@ -11,8 +11,11 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserMapper UserMapper;
-	public Integer insertUserService(User user) {
-		return UserMapper.insertUserMapper(user);
+	public Integer insertUser(User user) {
+		return UserMapper.insertUser(user);
+	}
+	public User getUser(String username, String passwd) {
+		return UserMapper.getUser(username, passwd);
 	}
 
 }

@@ -24,11 +24,14 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/signUp",method= {RequestMethod.POST})
+	@RequestMapping(value="/signUp/post",method= {RequestMethod.POST})
 	public @ResponseBody Integer signUp(User user) throws IllegalStateException, IOException {
-		System.out.println(userService.insertUserService(user));
-		System.out.println("123");
-		return userService.insertUserService(user);
+		return userService.insertUser(user);
+	}
+	
+	@RequestMapping(value="/login/get",method= {RequestMethod.GET})
+	public @ResponseBody User login(String username, String passwd) throws IllegalStateException, IOException {
+		return userService.getUser(username, passwd);
 	}
 	
 //	@RequestMapping(value="/user",method= {RequestMethod.POST})
