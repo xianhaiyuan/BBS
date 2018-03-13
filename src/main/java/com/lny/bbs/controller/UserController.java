@@ -2,13 +2,8 @@ package com.lny.bbs.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.UUID;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.lny.bbs.pojo.User;
 import com.lny.bbs.service.UserService;
 
@@ -31,29 +25,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/unLogin/post",method= {RequestMethod.POST})
-	public @ResponseBody Integer unLogin(Integer id,HttpSession session) throws IllegalStateException, IOException {
-		ServletContext context = session.getServletContext();  
-        int lineCount = (Integer) context.getAttribute("lineCount");  
-        context.setAttribute("lineCount", lineCount - 1);  
-        HashSet<HttpSession> sessionSet = (HashSet<HttpSession>) context.getAttribute("sessionSet");  
-        if(sessionSet!=null){  
-            sessionSet.remove(session);
-        } 
+	public @ResponseBody Integer unLogin(Integer id) throws IllegalStateException, IOException {
 		return userService.setUnOnline(id);
 	}
 	
 	@RequestMapping(value="/login/post",method= {RequestMethod.POST})
 	public @ResponseBody User login(String username, String passwd,HttpSession session) throws IllegalStateException, IOException {
-		User user = userService.queryUser(username, passwd);
-		if(user!=null){
-            session.setAttribute("username", user.getUsername());  //将用户名存入session  
-            ServletContext context = session.getServletContext();  
-            //打印在线人数  
-            System.out.println("在线人数："+context.getAttribute("lineCount"));
-        }  
-		userService.setOnline(user.getId());
-        //打印在线人数  
-		return user;
+		User user = userService.queryUser(username, passwd); 
+		if(user != null) {
+			session.setAttribute("user", user);
+			userService.setOnline(user.getId());
+			return user;
+		}
+		return null;
 	}
 	@RequestMapping(value="/userSettingAvatar/post",method= {RequestMethod.POST})
 	public @ResponseBody User UserSettingAvatar(User user,MultipartFile picFile) throws IllegalStateException, IOException {
@@ -75,12 +59,22 @@ public class UserController {
 	
 	@RequestMapping(value="/userSetting/post",method= {RequestMethod.POST})
 	public @ResponseBody User UserSetting(User user) throws IllegalStateException, IOException {
-		System.out.println("no pic");
 		if (userService.changeUserSetting(user) > 0) {
 			return userService.getUserById(user.getId());
 		}
 		return null;
 	}
+	
+	@RequestMapping(value="/onlineCount/get",method= {RequestMethod.GET})
+	public @ResponseBody Integer onlineCount() throws IllegalStateException, IOException {
+		return userService.getOnlineCount();
+	}
+	
+//	@RequestMapping(value="/testSession/get",method= {RequestMethod.GET})
+//	public @ResponseBody Integer testSession(HttpSession session) throws IllegalStateException, IOException {
+//		System.out.println(session.getAttribute("user"));
+//		return 1;
+//	}
 	
 //	@RequestMapping(value="/user",method= {RequestMethod.POST})
 //	public @ResponseBody User findUserById(Integer id,MultipartFile picFile,Model model) throws IllegalStateException, IOException {

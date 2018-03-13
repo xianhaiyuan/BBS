@@ -1,7 +1,5 @@
 package com.lny.bbs.service;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +28,9 @@ public class UserServiceImpl implements UserService {
 	}
 	public Integer setUnOnline(Integer id) {
 		return UserMapper.updateUnOnline(id);
+	}
+	public Integer getOnlineCount() {
+		return UserMapper.selectOnlineCount();
 	}
 
 }

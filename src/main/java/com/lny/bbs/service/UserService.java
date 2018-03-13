@@ -1,7 +1,4 @@
 package com.lny.bbs.service;
-
-import java.util.Map;
-
 import com.lny.bbs.pojo.User;
 
 public interface UserService {
@@ -11,4 +8,5 @@ public interface UserService {
 	public User getUserById(Integer id);
 	public void setOnline(Integer id);
 	public Integer setUnOnline(Integer id);
+	public Integer getOnlineCount();
 }

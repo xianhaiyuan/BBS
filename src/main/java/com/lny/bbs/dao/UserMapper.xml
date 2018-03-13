@@ -41,4 +41,7 @@
 	<update id="updateUnOnline">
 		update bbs_user set online = 0 where id = #{id}
 	</update>
+	<select id="selectOnlineCount" resultType="Integer">
+		select count(1) from bbs_user where online = 1
+	</select>
 </mapper>
