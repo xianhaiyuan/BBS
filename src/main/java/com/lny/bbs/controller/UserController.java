@@ -25,7 +25,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/unLogin/post",method= {RequestMethod.POST})
-	public @ResponseBody Integer unLogin(Integer id) throws IllegalStateException, IOException {
+	public @ResponseBody Integer unLogin(Integer id,HttpSession session) throws IllegalStateException, IOException {
+		session.removeAttribute("user");
 		return userService.setUnOnline(id);
 	}
 	
@@ -40,9 +41,14 @@ public class UserController {
 		return null;
 	}
 	@RequestMapping(value="/userSettingAvatar/post",method= {RequestMethod.POST})
-	public @ResponseBody User UserSettingAvatar(User user,MultipartFile picFile) throws IllegalStateException, IOException {
+	public @ResponseBody User UserSettingAvatar(User user,HttpSession session,MultipartFile picFile) throws IllegalStateException, IOException {
+		if(session.getAttribute("user") == null) {
+			user.setId(-1);
+			return user;
+		}
 		String picDirectory = "C:\\Users\\Administrator\\Desktop\\vuejs学习\\lny_bbs\\static\\avatar\\";
-		String oldFileName = user.getAvatar().split("/")[3];
+		String[] oldFileNameArr = user.getAvatar().split("/");
+		String oldFileName = oldFileNameArr[oldFileNameArr.length-1];
 		File oldFile = new File(picDirectory + oldFileName);
 		if (oldFile.exists()) {
           oldFile.delete();
@@ -58,7 +64,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/userSetting/post",method= {RequestMethod.POST})
-	public @ResponseBody User UserSetting(User user) throws IllegalStateException, IOException {
+	public @ResponseBody User UserSetting(User user,HttpSession session) throws IllegalStateException, IOException {
+		if(session.getAttribute("user") == null) {
+			user.setId(-1);
+			return user;
+		}
 		if (userService.changeUserSetting(user) > 0) {
 			return userService.getUserById(user.getId());
 		}
@@ -70,28 +80,4 @@ public class UserController {
 		return userService.getOnlineCount();
 	}
 	
-//	@RequestMapping(value="/testSession/get",method= {RequestMethod.GET})
-//	public @ResponseBody Integer testSession(HttpSession session) throws IllegalStateException, IOException {
-//		System.out.println(session.getAttribute("user"));
-//		return 1;
-//	}
-	
-//	@RequestMapping(value="/user",method= {RequestMethod.POST})
-//	public @ResponseBody User findUserById(Integer id,MultipartFile picFile,Model model) throws IllegalStateException, IOException {
-//		User user = userService.findUserById(id);
-//		String name = UUID.randomUUID().toString().replaceAll("-", "");
-//		String ext = FilenameUtils.getExtension(picFile.getOriginalFilename());
-//		picFile.transferTo(new File("H:\\upload\\" + name +"."+ ext));
-//		System.out.println(id);
-//		System.out.println(user);
-//		return user;
-//	}
-
-//	@RequestMapping(value="/login/post", method= {RequestMethod.POST})
-//	public @ResponseBody String login(String username, String pass, HttpSession session) {
-////		session.setAttribute("SESSION_USER", user);
-//		System.out.println(username+","+pass);
-////		return User;
-//		return "yes";
-//	}
 }
