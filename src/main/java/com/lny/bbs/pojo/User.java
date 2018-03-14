@@ -17,7 +17,7 @@ public class User implements Serializable {
     private String sex;
     private Integer accuse;  
     private Integer ban;
-    private Integer position;
+    private String position;
     private Integer online;
     private String avatar;
     private Integer article_count;
@@ -58,10 +58,10 @@ public class User implements Serializable {
 	public void setBan(Integer ban) {
 		this.ban = ban;
 	}
-	public Integer getPosition() {
+	public String getPosition() {
 		return position;
 	}
-	public void setPosition(Integer position) {
+	public void setPosition(String position) {
 		this.position = position;
 	}
 	public Integer getOnline() {

@@ -3,11 +3,11 @@ import com.lny.bbs.pojo.User;
 
 public interface UserMapper {
 
-	public Integer insertUser(User user);
-	public User selectUserByUsername_passwd(String username, String passwd);
-	public Integer updateUserSetting(User user);
-	public User selectUserById(Integer id);
-	public void updateOnline(Integer id);
-	public Integer updateUnOnline(Integer id);
-	public Integer selectOnlineCount();
+	Integer insertUser(User user);
+	User selectUserByUsername_passwd(String username, String passwd);
+	Integer updateUserSetting(User user);
+	User selectUserById(Integer id);
+	void updateOnline(Integer id);
+	Integer updateUnOnline(Integer id);
+	Integer selectOnlineCount();
 }

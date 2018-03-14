@@ -64,7 +64,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/userSetting/post",method= {RequestMethod.POST})
-	public @ResponseBody User UserSetting(User user,HttpSession session) throws IllegalStateException, IOException {
+	public @ResponseBody User userSetting(User user,HttpSession session) throws IllegalStateException, IOException {
 		if(session.getAttribute("user") == null) {
 			user.setId(-1);
 			return user;
