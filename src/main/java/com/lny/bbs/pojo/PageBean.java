@@ -1,9 +1,16 @@
 package com.lny.bbs.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageBean<T> {
+import org.springframework.stereotype.Repository;
+@Repository
+public class PageBean<T> implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//当前页
 	private Integer currentPage;
 	//每页多少条

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lny.bbs.dao.SectionMapper" >
-	<resultMap type="sectionVo" id="sectionArticleMap">
+	<resultMap type="sectionVo" id="selectAllSectionMap">
 		<id property="id" column="id"/>
 		<result property="sec_name" column="sec_name"/>
 		<result property="sec_label" column="sec_label"/>
@@ -17,7 +17,7 @@
 			<result property="title" column="title"/>
 		</collection>
 	</resultMap>
-	<select id="selectAllSection" resultMap="sectionArticleMap">
+	<select id="selectAllSection" resultMap="selectAllSectionMap">
 		select
 		s.id,s.sec_name,s.sec_label,s.uid,
 		a.id aid,a.content,a.uid,a.date,a.author,a.art_label,a.sid,a.reply_count,a.title

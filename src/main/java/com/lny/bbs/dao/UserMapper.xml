@@ -44,4 +44,47 @@
 	<select id="selectOnlineCount" resultType="Integer">
 		select count(1) from bbs_user where online = 1
 	</select>
+	<select id="queryUserCount" resultType="Integer">
+		select count(1) from bbs_user;
+	</select>
+	<resultMap type="UserSectionVo" id="selectUserSectionPageMap">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="nickname" property="nickname"/>
+		<result column="position" property="position"/>
+		<collection property="section" javaType="section">
+			<id column="sid" property="id"/>
+			<result column="sec_name" property="sec_name"/>
+			<result column="sec_label" property="sec_label"/>
+			<result column="uid" property="uid"/>
+		</collection>
+	</resultMap>
+	<select id="selectUserSectionPage" parameterType="pageQueryVo" resultMap="selectUserSectionPageMap">
+		select
+		u.id,u.username,u.nickname,u.position,
+		s.id sid,s.sec_name,s.sec_label,s.uid
+		from bbs_user u left join bbs_section s on u.id = s.uid
+		limit #{startIndex},#{pageSize}
+	</select>
+	<update id="updateUserPosition">
+		update bbs_user
+		<set>
+			position = #{1}
+		</set>
+		where id = #{0}
+	</update>
+	<update id="updateUserPositionSection">
+		update bbs_user
+		<set>
+			position = #{2}
+		</set>
+		where id = #{0};
+		update bbs_section
+		<set>
+			uid = #{0}
+		</set>
+		<where>
+			sec_name = #{1}
+		</where>
+	</update>
 </mapper>

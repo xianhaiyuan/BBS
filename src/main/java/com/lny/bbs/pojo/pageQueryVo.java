@@ -1,8 +1,17 @@
 package com.lny.bbs.pojo;
 
-public class pageQueryVo {
+import java.io.Serializable;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class pageQueryVo implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer startIndex = 0;
-	private Integer pageSize = 1;
+	private Integer pageSize = 2;
 	public Integer getPageSize() {
 		return pageSize;
 	}

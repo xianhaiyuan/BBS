@@ -11,13 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.lny.bbs.pojo.PageBean;
+import com.lny.bbs.pojo.Section;
 import com.lny.bbs.pojo.User;
+import com.lny.bbs.pojo.UserSectionVo;
+import com.lny.bbs.pojo.pageQueryVo;
 import com.lny.bbs.service.UserService;
+import com.lny.bbs.service.pageService;
 
 @Controller
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private pageService<UserSectionVo> pageService;
 	
 	@RequestMapping(value="/signUp/post",method= {RequestMethod.POST})
 	public @ResponseBody Integer signUp(User user) throws IllegalStateException, IOException {
@@ -78,6 +86,25 @@ public class UserController {
 	@RequestMapping(value="/onlineCount/get",method= {RequestMethod.GET})
 	public @ResponseBody Integer onlineCount() throws IllegalStateException, IOException {
 		return userService.getOnlineCount();
+	}
+	
+	@RequestMapping(value="/userSectionPage/get",method= {RequestMethod.GET})
+	public @ResponseBody PageBean<UserSectionVo> userSectionPage(Integer currentPage) throws IllegalStateException, IOException {	
+		pageService.setPageBeanTotalCount(userService.getUserCount());
+		pageService.initPageQueryVo(currentPage);
+		pageService.setPageBeanData(userService.getUserSectionPage(pageService.getPageQueryVo()));
+		return pageService.getPageBean();
+	}
+	
+	@RequestMapping(value="/changeUserPosition/post",method= {RequestMethod.POST})
+	public @ResponseBody Integer changeUserPosition(Integer id,String position) throws IllegalStateException, IOException {	
+		return userService.changeUserPosition(id, position);
+	}
+	@RequestMapping(value="/changeUserPositionSection/post",method= {RequestMethod.POST})
+	public @ResponseBody Integer changeUserPositionSection(Integer id,String position, String sec_name) throws IllegalStateException, IOException {	
+//		if(userService.changeUserPosition(id, position) > 0)
+			return userService.changeUserPositionSection(id, sec_name ,position);
+//		return 0;
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,11 +15,15 @@ import com.lny.bbs.pojo.Section;
 import com.lny.bbs.pojo.SectionVo;
 import com.lny.bbs.pojo.pageQueryVo;
 import com.lny.bbs.service.SectionService;
+import com.lny.bbs.service.pageService;
+import com.lny.bbs.service.pageServiceImpl;
 
 @Controller
 public class SectionController {
 	@Autowired
 	private SectionService sectionService;
+	@Autowired
+	private pageService<Section> pageService;
 	
 	@RequestMapping(value="/AllSection/get",method= {RequestMethod.GET})
 	public @ResponseBody List<SectionVo> section() throws IllegalStateException, IOException {
@@ -26,14 +31,10 @@ public class SectionController {
 	}
 	@RequestMapping(value="/sectionPage/get",method= {RequestMethod.GET})
 	public @ResponseBody PageBean<Section> sectionPage(Integer currentPage) throws IllegalStateException, IOException {
-		PageBean<Section> pageBean = new PageBean<Section>();
-		pageBean.setTotalCount(sectionService.getSectionCount());
-//		pageBean.setCurrentPage(currentPage);
-		pageQueryVo pageQueryVo = new pageQueryVo();
-		pageQueryVo.setStartIndex((currentPage-1)*pageBean.getPageSize());
-		pageQueryVo.setPageSize(pageBean.getPageSize());
-		pageBean.setPageData(sectionService.getSectionPage(pageQueryVo));
-		return pageBean;
+		pageService.setPageBeanTotalCount(sectionService.getSectionCount());
+		pageService.initPageQueryVo(currentPage);
+		pageService.setPageBeanData(sectionService.getSectionPage(pageService.getPageQueryVo()));
+		return pageService.getPageBean();
 	}
 	@RequestMapping(value="/sectionChange/post",method= {RequestMethod.POST})
 	public @ResponseBody Integer changeSectionPage(Section sectionForm) throws IllegalStateException, IOException {
