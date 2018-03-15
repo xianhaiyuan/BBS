@@ -17,6 +17,7 @@ import com.lny.bbs.pojo.Section;
 import com.lny.bbs.pojo.User;
 import com.lny.bbs.pojo.UserSectionVo;
 import com.lny.bbs.pojo.pageQueryVo;
+import com.lny.bbs.service.SectionService;
 import com.lny.bbs.service.UserService;
 import com.lny.bbs.service.pageService;
 
@@ -24,6 +25,8 @@ import com.lny.bbs.service.pageService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private SectionService sectionService;
 	@Autowired
 	private pageService<UserSectionVo> pageService;
 	
@@ -102,9 +105,10 @@ public class UserController {
 	}
 	@RequestMapping(value="/changeUserPositionSection/post",method= {RequestMethod.POST})
 	public @ResponseBody Integer changeUserPositionSection(Integer id,String position, String sec_name) throws IllegalStateException, IOException {	
-//		if(userService.changeUserPosition(id, position) > 0)
+		if (sectionService.querySectionByName(sec_name) > 0) {
 			return userService.changeUserPositionSection(id, sec_name ,position);
-//		return 0;
+		}		
+		return -1;
 	}
 	
 }

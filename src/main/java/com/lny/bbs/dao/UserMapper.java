@@ -17,5 +17,5 @@ public interface UserMapper {
 	Integer queryUserCount();
 	List<UserSectionVo> selectUserSectionPage(pageQueryVo pageQueryVo);
 	Integer updateUserPosition(Integer id,String position);
-	Integer updateUserPositionSection(Integer id, String sec_name, String position);
+	Integer updateUserPositionSection(Integer id, String position);
 }

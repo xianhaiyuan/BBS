@@ -37,5 +37,11 @@ public class SectionServiceImpl implements SectionService {
 	public Integer removeSection(Section sectionForm) {
 		return sectionMapper.deleteSection(sectionForm);
 	}
+	public Integer querySectionByName(String sec_name) {
+		return sectionMapper.selectSectionByName(sec_name);
+	}
+	public Integer changeOldPosition(Integer uid) {
+		return sectionMapper.updateOldPosition(uid);
+	}
 
 }

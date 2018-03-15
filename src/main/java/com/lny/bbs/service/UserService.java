@@ -16,5 +16,5 @@ public interface UserService {
 	Integer getUserCount();
 	List<UserSectionVo> getUserSectionPage(pageQueryVo pageQueryVo);
 	Integer changeUserPosition(Integer id,String position);
-	Integer changeUserPositionSection(Integer id, String sec_name ,String position);
+	Integer changeUserPositionSection(Integer id ,String sec_name,String position);
 }

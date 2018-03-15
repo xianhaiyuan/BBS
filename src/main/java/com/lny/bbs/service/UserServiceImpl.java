@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lny.bbs.dao.SectionMapper;
 import com.lny.bbs.dao.UserMapper;
 import com.lny.bbs.pojo.User;
 import com.lny.bbs.pojo.UserSectionVo;
@@ -15,6 +16,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserMapper UserMapper;
+	@Autowired
+	private SectionMapper sectionMapper;
 	public Integer addUser(User user) {
 		return UserMapper.insertUser(user);
 	}
@@ -43,10 +46,13 @@ public class UserServiceImpl implements UserService {
 		return UserMapper.selectUserSectionPage(pageQueryVo);
 	}
 	public Integer changeUserPosition(Integer id,String position) {
+		sectionMapper.updateOldPosition(id);
 		return UserMapper.updateUserPosition(id, position);
 	}
 	public Integer changeUserPositionSection(Integer id, String sec_name, String position) {
-		return UserMapper.updateUserPositionSection(id, sec_name, position);
+		sectionMapper.updateOldPosition(id);
+		sectionMapper.updateUserPositionSection(id, sec_name);
+		return UserMapper.updateUserPositionSection(id, position);
 	}
 
 }

@@ -22,5 +22,9 @@ public interface SectionMapper {
 
 	Integer deleteSection(Section sectionForm);
 
+	Integer selectSectionByName(String sec_name);
 
+	Integer updateOldPosition(Integer uid);
+
+	Integer updateUserPositionSection(Integer uid, String sec_name);
 }

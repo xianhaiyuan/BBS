@@ -76,15 +76,8 @@
 	<update id="updateUserPositionSection">
 		update bbs_user
 		<set>
-			position = #{2}
+			position = #{1}
 		</set>
 		where id = #{0};
-		update bbs_section
-		<set>
-			uid = #{0}
-		</set>
-		<where>
-			sec_name = #{1}
-		</where>
 	</update>
 </mapper>

@@ -54,4 +54,20 @@
 		delete from bbs_section
 		where id = #{id}
 	</delete>
+	<select id="selectSectionByName" parameterType="String" resultType="Integer">
+		select count(1) from bbs_section where sec_name = #{sec_name}
+	</select>
+	<update id="updateUserPositionSection">
+		update bbs_section
+		<set>
+			uid = #{0}
+		</set>
+		<where>
+			sec_name = #{1}
+		</where>
+	</update>
+	<update id="updateOldPosition" parameterType="Integer">
+		update bbs_section set uid = null
+		where uid = #{uid}
+	</update>
 </mapper>

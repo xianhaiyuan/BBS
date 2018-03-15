@@ -20,5 +20,9 @@ public interface SectionService {
 	Integer addSection(Section sectionForm);
 
 	Integer removeSection(Section sectionForm);
+	
+	Integer querySectionByName(String sec_name);
+	
+	Integer changeOldPosition(Integer uid);
 
 }
