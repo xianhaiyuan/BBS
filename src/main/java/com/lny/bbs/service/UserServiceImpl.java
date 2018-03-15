@@ -54,5 +54,29 @@ public class UserServiceImpl implements UserService {
 		sectionMapper.updateUserPositionSection(id, sec_name);
 		return UserMapper.updateUserPositionSection(id, position);
 	}
+	public List<User> getUserBanPage(pageQueryVo pageQueryVo) {
+		return UserMapper.selectUserBanPage(pageQueryVo);
+	}
+	public Integer getUserBanCount() {
+		return UserMapper.queryUserBanCount();
+	}
+	public Integer changeUserUnban(Integer id) {
+		return UserMapper.updateUserUnban(id);
+	}
+	public Integer getUserAccuseCount() {
+		return UserMapper.queryUserAccuseCount();
+	}
+	public List<User> getUserAccusePage(pageQueryVo pageQueryVo) {
+		return UserMapper.selectUserAccusePage(pageQueryVo);
+	}
+	public Integer changeUserBan(Integer id) {
+		return UserMapper.updateUserBan(id);
+	}
+	public Integer changeUserAccuse(Integer id) {
+		return UserMapper.updateUserAccuse(id);
+	}
+	public Integer changeUserUnaccuse(Integer id) {
+		return UserMapper.updateUserUnaccuse(id);
+	}
 
 }

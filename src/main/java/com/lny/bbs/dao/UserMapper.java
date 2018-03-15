@@ -18,4 +18,12 @@ public interface UserMapper {
 	List<UserSectionVo> selectUserSectionPage(pageQueryVo pageQueryVo);
 	Integer updateUserPosition(Integer id,String position);
 	Integer updateUserPositionSection(Integer id, String position);
+	List<User> selectUserBanPage(pageQueryVo pageQueryVo);
+	Integer queryUserBanCount();
+	Integer updateUserUnban(Integer id);
+	Integer queryUserAccuseCount();
+	List<User> selectUserAccusePage(pageQueryVo pageQueryVo);
+	Integer updateUserBan(Integer id);
+	Integer updateUserAccuse(Integer id);
+	Integer updateUserUnaccuse(Integer id);
 }

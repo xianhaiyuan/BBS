@@ -25,4 +25,6 @@ public interface SectionService {
 	
 	Integer changeOldPosition(Integer uid);
 
+	Section getSectionByUid(Integer uid);
+
 }

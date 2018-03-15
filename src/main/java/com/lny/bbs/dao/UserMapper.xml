@@ -80,4 +80,54 @@
 		</set>
 		where id = #{0};
 	</update>
+	<select id="selectUserBanPage" parameterType="pageQueryVo" resultType="user">
+		select id,username,nickname from bbs_user where ban = 1
+		limit #{startIndex},#{pageSize}
+	</select>
+	<select id="queryUserBanCount" resultType="Integer">
+		select count(1) from bbs_user where ban = 1
+	</select>
+	<update id="updateUserUnban" parameterType="Integer">
+		update bbs_user
+		<set>
+			ban = 0
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+	<select id="queryUserAccuseCount" resultType="Integer">
+		select count(1) from bbs_user where accuse = 1 and ( ban = 0 or ban is null )
+	</select>
+	<select id="selectUserAccusePage" parameterType="pageQueryVo" resultType="user">
+		select id,username,nickname from bbs_user where accuse = 1 and ( ban = 0 or ban is null )
+		limit #{startIndex},#{pageSize}
+	</select>
+	<update id="updateUserBan">
+		update bbs_user
+		<set>
+			ban = 1
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+	<update id="updateUserAccuse">
+		update bbs_user
+		<set>
+			accuse = 1
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+	<update id="updateUserUnaccuse">
+		update bbs_user
+		<set>
+			accuse = 0
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
 </mapper>

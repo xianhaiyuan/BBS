@@ -27,4 +27,6 @@ public interface SectionMapper {
 	Integer updateOldPosition(Integer uid);
 
 	Integer updateUserPositionSection(Integer uid, String sec_name);
+
+	Section selectSectionByUid(Integer uid);
 }

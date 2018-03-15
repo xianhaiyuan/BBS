@@ -5,7 +5,7 @@ import java.util.List;
 import com.lny.bbs.pojo.PageBean;
 import com.lny.bbs.pojo.pageQueryVo;
 
-public interface pageService<T> {
+public interface PageService<T> {
 	void initPageQueryVo(Integer currentPage);
 	void setPageBeanTotalCount(Integer totalCount);
 	void setPageBeanData(List<T> pageData);

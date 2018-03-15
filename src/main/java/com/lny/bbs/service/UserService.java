@@ -17,4 +17,12 @@ public interface UserService {
 	List<UserSectionVo> getUserSectionPage(pageQueryVo pageQueryVo);
 	Integer changeUserPosition(Integer id,String position);
 	Integer changeUserPositionSection(Integer id ,String sec_name,String position);
+	List<User> getUserBanPage(pageQueryVo pageQueryVo);
+	Integer getUserBanCount();
+	Integer changeUserUnban(Integer id);
+	Integer getUserAccuseCount();
+	List<User> getUserAccusePage(pageQueryVo pageQueryVo);
+	Integer changeUserBan(Integer id);
+	Integer changeUserAccuse(Integer id);
+	Integer changeUserUnaccuse(Integer id);
 }

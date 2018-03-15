@@ -9,7 +9,7 @@ import com.lny.bbs.pojo.PageBean;
 import com.lny.bbs.pojo.pageQueryVo;
 
 @Service
-public class pageServiceImpl<T> implements pageService<T> {
+public class PageServiceImpl<T> implements PageService<T> {
 	@Autowired
 	private pageQueryVo pageQueryVo;
 	@Autowired

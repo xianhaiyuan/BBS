@@ -70,4 +70,7 @@
 		update bbs_section set uid = null
 		where uid = #{uid}
 	</update>
+	<select id="selectSectionByUid" parameterType="Integer" resultType="section">
+		select * from bbs_section where uid = #{uid}
+	</select>
 </mapper>

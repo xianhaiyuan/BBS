@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.lny.bbs.pojo.PageBean;
-import com.lny.bbs.pojo.Section;
 import com.lny.bbs.pojo.User;
 import com.lny.bbs.pojo.UserSectionVo;
-import com.lny.bbs.pojo.pageQueryVo;
 import com.lny.bbs.service.SectionService;
 import com.lny.bbs.service.UserService;
-import com.lny.bbs.service.pageService;
+import com.lny.bbs.service.PageService;
 
 @Controller
 public class UserController {
@@ -28,20 +25,23 @@ public class UserController {
 	@Autowired
 	private SectionService sectionService;
 	@Autowired
-	private pageService<UserSectionVo> pageService;
+	private PageService<UserSectionVo> userSectionPageService;
+	@Autowired
+	private PageService<User> userPageService;
 	
-	@RequestMapping(value="/signUp/post",method= {RequestMethod.POST})
+	
+	@RequestMapping(value="/signUp/post",method={RequestMethod.POST})
 	public @ResponseBody Integer signUp(User user) throws IllegalStateException, IOException {
 		return userService.addUser(user);
 	}
 	
-	@RequestMapping(value="/unLogin/post",method= {RequestMethod.POST})
+	@RequestMapping(value="/unLogin/post",method={RequestMethod.POST})
 	public @ResponseBody Integer unLogin(Integer id,HttpSession session) throws IllegalStateException, IOException {
 		session.removeAttribute("user");
 		return userService.setUnOnline(id);
 	}
 	
-	@RequestMapping(value="/login/post",method= {RequestMethod.POST})
+	@RequestMapping(value="/login/post",method={RequestMethod.POST})
 	public @ResponseBody User login(String username, String passwd,HttpSession session) throws IllegalStateException, IOException {
 		User user = userService.queryUser(username, passwd); 
 		if(user != null) {
@@ -51,7 +51,7 @@ public class UserController {
 		}
 		return null;
 	}
-	@RequestMapping(value="/userSettingAvatar/post",method= {RequestMethod.POST})
+	@RequestMapping(value="/userSettingAvatar/post",method={RequestMethod.POST})
 	public @ResponseBody User UserSettingAvatar(User user,HttpSession session,MultipartFile picFile) throws IllegalStateException, IOException {
 		if(session.getAttribute("user") == null) {
 			user.setId(-1);
@@ -74,7 +74,7 @@ public class UserController {
 		return null;
 	}
 	
-	@RequestMapping(value="/userSetting/post",method= {RequestMethod.POST})
+	@RequestMapping(value="/userSetting/post",method={RequestMethod.POST})
 	public @ResponseBody User userSetting(User user,HttpSession session) throws IllegalStateException, IOException {
 		if(session.getAttribute("user") == null) {
 			user.setId(-1);
@@ -86,29 +86,58 @@ public class UserController {
 		return null;
 	}
 	
-	@RequestMapping(value="/onlineCount/get",method= {RequestMethod.GET})
+	@RequestMapping(value="/onlineCount/get",method={RequestMethod.GET})
 	public @ResponseBody Integer onlineCount() throws IllegalStateException, IOException {
 		return userService.getOnlineCount();
 	}
 	
-	@RequestMapping(value="/userSectionPage/get",method= {RequestMethod.GET})
+	@RequestMapping(value="/userSectionPage/get",method={RequestMethod.GET})
 	public @ResponseBody PageBean<UserSectionVo> userSectionPage(Integer currentPage) throws IllegalStateException, IOException {	
-		pageService.setPageBeanTotalCount(userService.getUserCount());
-		pageService.initPageQueryVo(currentPage);
-		pageService.setPageBeanData(userService.getUserSectionPage(pageService.getPageQueryVo()));
-		return pageService.getPageBean();
+		userSectionPageService.setPageBeanTotalCount(userService.getUserCount());
+		userSectionPageService.initPageQueryVo(currentPage);
+		userSectionPageService.setPageBeanData(userService.getUserSectionPage(userSectionPageService.getPageQueryVo()));
+		return userSectionPageService.getPageBean();
 	}
 	
-	@RequestMapping(value="/changeUserPosition/post",method= {RequestMethod.POST})
+	@RequestMapping(value="/changeUserPosition/post",method={RequestMethod.POST})
 	public @ResponseBody Integer changeUserPosition(Integer id,String position) throws IllegalStateException, IOException {	
 		return userService.changeUserPosition(id, position);
 	}
-	@RequestMapping(value="/changeUserPositionSection/post",method= {RequestMethod.POST})
+	@RequestMapping(value="/changeUserPositionSection/post",method={RequestMethod.POST})
 	public @ResponseBody Integer changeUserPositionSection(Integer id,String position, String sec_name) throws IllegalStateException, IOException {	
 		if (sectionService.querySectionByName(sec_name) > 0) {
 			return userService.changeUserPositionSection(id, sec_name ,position);
 		}		
 		return -1;
 	}
-	
+	@RequestMapping(value="/userBanPage/get",method={RequestMethod.GET})
+	public @ResponseBody PageBean<User> userBanPage(Integer currentPage) throws IllegalStateException, IOException {	
+		userPageService.setPageBeanTotalCount(userService.getUserBanCount());
+		userPageService.initPageQueryVo(currentPage);
+		userPageService.setPageBeanData(userService.getUserBanPage(userPageService.getPageQueryVo()));
+		return userPageService.getPageBean();
+	}
+	@RequestMapping(value="/unBanUser/post",method={RequestMethod.POST})
+	public @ResponseBody Integer unBanUser(Integer id) throws IllegalStateException, IOException {	
+		return userService.changeUserUnban(id);
+	}
+	@RequestMapping(value="/banUser/post",method={RequestMethod.POST})
+	public @ResponseBody Integer banUser(Integer id) throws IllegalStateException, IOException {	
+		return userService.changeUserBan(id);
+	}
+	@RequestMapping(value="/userAccusePage/get",method={RequestMethod.GET})
+	public @ResponseBody PageBean<User> userAccusePage(Integer currentPage) throws IllegalStateException, IOException {	
+		userPageService.setPageBeanTotalCount(userService.getUserAccuseCount());
+		userPageService.initPageQueryVo(currentPage);
+		userPageService.setPageBeanData(userService.getUserAccusePage(userPageService.getPageQueryVo()));
+		return userPageService.getPageBean();
+	}
+	@RequestMapping(value="/accuseUser/post",method={RequestMethod.POST})
+	public @ResponseBody Integer accuseUser(Integer id) throws IllegalStateException, IOException {	
+		return userService.changeUserAccuse(id);
+	}
+	@RequestMapping(value="/UnaccuseUser/post",method={RequestMethod.POST})
+	public @ResponseBody Integer UnaccuseUser(Integer id) throws IllegalStateException, IOException {	
+		return userService.changeUserUnaccuse(id);
+	}
 }

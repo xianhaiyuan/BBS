@@ -43,5 +43,8 @@ public class SectionServiceImpl implements SectionService {
 	public Integer changeOldPosition(Integer uid) {
 		return sectionMapper.updateOldPosition(uid);
 	}
+	public Section getSectionByUid(Integer uid) {
+		return sectionMapper.selectSectionByUid(uid);
+	}
 
 }
