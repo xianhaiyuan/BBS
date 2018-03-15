@@ -17,4 +17,14 @@ public interface ArticleMapper {
 
 	Integer updateArticle(Article article);
 
+	Integer queryArticleCountByUid(Integer uid);
+
+	List<Article> selectArticlePageByUid(@Param("pageQueryVo")pageQueryVo pageQueryVo, @Param("uid")Integer uid);
+
+	Integer queryArticleCountByStar(Integer uid);
+
+	List<Article> selectArticlePageByStar(@Param("pageQueryVo")pageQueryVo pageQueryVo, @Param("uid")Integer uid);
+
+	Integer deleteArticleByStar(Integer uid, Integer aid);
+
 }

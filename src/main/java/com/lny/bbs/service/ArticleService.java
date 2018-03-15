@@ -15,4 +15,14 @@ public interface ArticleService {
 
 	Integer changeArticle(Article article);
 
+	Integer getArticleCountByUid(Integer uid);
+
+	List<Article> getArticlePageByUid(pageQueryVo pageQueryVo, Integer uid);
+
+	Integer getArticleCountByStar(Integer uid);
+
+	List<Article> getArticlePageByStar(pageQueryVo pageQueryVo, Integer uid);
+
+	Integer removeArticleByStar(Integer uid, Integer aid);
+
 }

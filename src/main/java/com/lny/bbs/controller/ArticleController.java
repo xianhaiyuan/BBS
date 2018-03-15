@@ -26,12 +26,30 @@ public class ArticleController {
 		articlePageService.setPageBeanData(articleService.getArticlePageBySid(articlePageService.getPageQueryVo(),sid));
 		return articlePageService.getPageBean();
 	}
-	@RequestMapping(value="/removeArticlePageById/post",method= {RequestMethod.POST})
+	@RequestMapping(value="/removeArticleById/post",method= {RequestMethod.POST})
 	public @ResponseBody Integer removeArticlePageById(Integer id){
 		return articleService.removeArticlePageById(id);
 	}
-	@RequestMapping(value="/changeArticlePage/post",method= {RequestMethod.POST})
+	@RequestMapping(value="/changeArticle/post",method= {RequestMethod.POST})
 	public @ResponseBody Integer changeArticle(Article article){
 		return articleService.changeArticle(article);
+	}
+	@RequestMapping(value="/articlePageByUid/get",method= {RequestMethod.GET})
+	public @ResponseBody PageBean<Article> articlePageByUid(Integer uid, Integer currentPage){
+		articlePageService.setPageBeanTotalCount(articleService.getArticleCountByUid(uid));
+		articlePageService.initPageQueryVo(currentPage);
+		articlePageService.setPageBeanData(articleService.getArticlePageByUid(articlePageService.getPageQueryVo(),uid));
+		return articlePageService.getPageBean();
+	}
+	@RequestMapping(value="/articlePageByStar/get",method= {RequestMethod.GET})
+	public @ResponseBody PageBean<Article> articlePageByStar(Integer uid, Integer currentPage){
+		articlePageService.setPageBeanTotalCount(articleService.getArticleCountByStar(uid));
+		articlePageService.initPageQueryVo(currentPage);
+		articlePageService.setPageBeanData(articleService.getArticlePageByStar(articlePageService.getPageQueryVo(),uid));
+		return articlePageService.getPageBean();
+	}
+	@RequestMapping(value="/removeArticleByStar/post",method= {RequestMethod.POST})
+	public @ResponseBody Integer removeArticleByStar(Integer uid, Integer aid){
+		return articleService.removeArticleByStar(uid, aid);
 	}
 }

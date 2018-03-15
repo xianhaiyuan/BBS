@@ -31,4 +31,25 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.updateArticle(article);
 	}
 
+	public Integer getArticleCountByUid(Integer uid) {
+		return articleMapper.queryArticleCountByUid(uid);
+	}
+
+	public List<Article> getArticlePageByUid(pageQueryVo pageQueryVo, Integer uid) {
+		return articleMapper.selectArticlePageByUid(pageQueryVo, uid);
+	}
+
+	public Integer getArticleCountByStar(Integer uid) {
+		return articleMapper.queryArticleCountByStar(uid);
+	}
+
+	public List<Article> getArticlePageByStar(pageQueryVo pageQueryVo, Integer uid) {
+		return articleMapper.selectArticlePageByStar(pageQueryVo, uid);
+	}
+
+	public Integer removeArticleByStar(Integer uid, Integer aid) {
+		// TODO Auto-generated method stub
+		return articleMapper.deleteArticleByStar(uid,aid);
+	}
+
 }

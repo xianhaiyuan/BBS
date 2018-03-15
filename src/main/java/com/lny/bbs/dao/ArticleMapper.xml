@@ -28,4 +28,26 @@
 			id = #{id}
 		</where>
 	</update>
+	<select id="queryArticleCountByUid" parameterType="Integer" resultType="Integer">
+		select count(1) from bbs_article where uid = #{uid}
+	</select>
+	<select id="selectArticlePageByUid" parameterType="pageQueryVo" resultType="article">
+		select * from bbs_article where uid = #{uid}
+		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
+	</select>
+	<select id="queryArticleCountByStar" parameterType="Integer" resultType="Integer">
+		select count(1) from bbs_article a 
+		left join bbs_star s on a.id = s.aid 
+		left join bbs_user u on u.id = s.uid where u.id = #{uid}
+	</select>
+	<select id="selectArticlePageByStar" parameterType="pageQueryVo" resultType="article">
+		select a.id,a.content,a.uid,a.date,a.author,a.art_label,a.sid,a.reply_count,a.title 
+		from bbs_article a 
+		left join bbs_star s on a.id = s.aid 
+		left join bbs_user u on u.id = s.uid where u.id = #{uid}
+		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
+	</select>
+	<delete id="deleteArticleByStar">
+		delete from bbs_star where uid = #{0} and aid = #{1}
+	</delete>
 </mapper>
