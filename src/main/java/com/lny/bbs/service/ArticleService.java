@@ -3,6 +3,7 @@ package com.lny.bbs.service;
 import java.util.List;
 
 import com.lny.bbs.pojo.Article;
+import com.lny.bbs.pojo.ArticleVo;
 import com.lny.bbs.pojo.pageQueryVo;
 
 public interface ArticleService {
@@ -26,5 +27,9 @@ public interface ArticleService {
 	Integer removeArticleByStar(Integer uid, Integer aid);
 
 	Integer addArticle(Article article);
+
+	ArticleVo getArticleBySidAid(Integer sid, Integer aid);
+
+	Integer addArticleStar(Integer uid, Integer aid);
 
 }

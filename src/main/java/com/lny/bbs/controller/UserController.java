@@ -140,4 +140,8 @@ public class UserController {
 	public @ResponseBody Integer UnaccuseUser(Integer id) throws IllegalStateException, IOException {	
 		return userService.changeUserUnaccuse(id);
 	}
+	@RequestMapping(value="/userById/get",method={RequestMethod.GET})
+	public @ResponseBody User userById(Integer id) throws IllegalStateException, IOException {	
+		return userService.getUserById(id);
+	}
 }

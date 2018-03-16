@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lny.bbs.pojo.Article;
+import com.lny.bbs.pojo.ArticleVo;
 import com.lny.bbs.pojo.PageBean;
 import com.lny.bbs.service.ArticleService;
 import com.lny.bbs.service.PageService;
@@ -52,8 +53,16 @@ public class ArticleController {
 	public @ResponseBody Integer removeArticleByStar(Integer uid, Integer aid){
 		return articleService.removeArticleByStar(uid, aid);
 	}
+	@RequestMapping(value="/addArticleStar/post",method= {RequestMethod.POST})
+	public @ResponseBody Integer addArticleStar(Integer uid, Integer aid){
+		return articleService.addArticleStar(uid, aid);
+	}
 	@RequestMapping(value="/addArticle/post",method= {RequestMethod.POST})
 	public @ResponseBody Integer addArticle(Article article){
 		return articleService.addArticle(article);
+	}
+	@RequestMapping(value="/articleBySidAid/get",method= {RequestMethod.GET})
+	public @ResponseBody ArticleVo articleBySidAid(Integer sid, Integer aid){
+		return articleService.getArticleBySidAid(sid,aid);
 	}
 }

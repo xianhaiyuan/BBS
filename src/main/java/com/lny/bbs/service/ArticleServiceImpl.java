@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.lny.bbs.dao.ArticleMapper;
 import com.lny.bbs.dao.UserMapper;
 import com.lny.bbs.pojo.Article;
+import com.lny.bbs.pojo.ArticleVo;
 import com.lny.bbs.pojo.pageQueryVo;
 
 @Service
@@ -58,6 +59,14 @@ public class ArticleServiceImpl implements ArticleService {
 	public Integer addArticle(Article article) {
 		userMapper.updateUserArticleCountInc(article.getUid());
 		return articleMapper.insertArticle(article);
+	}
+
+	public ArticleVo getArticleBySidAid(Integer sid, Integer aid) {
+		return articleMapper.selectArticleBySidAid(sid,aid);
+	}
+
+	public Integer addArticleStar(Integer uid, Integer aid) {
+		return articleMapper.insertArticleStar(uid,aid);
 	}
 
 }
