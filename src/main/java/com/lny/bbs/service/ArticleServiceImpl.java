@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lny.bbs.dao.ArticleMapper;
+import com.lny.bbs.dao.UserMapper;
 import com.lny.bbs.pojo.Article;
 import com.lny.bbs.pojo.pageQueryVo;
 
@@ -14,6 +15,8 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
 	private ArticleMapper articleMapper;
+	@Autowired
+	private UserMapper userMapper;
 	
 	public Integer getArticleCountBySid(Integer sid) {
 		return articleMapper.queryArticleCountBySid(sid);
@@ -23,8 +26,9 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.selectArticlePageBySid(pageQueryVo, sid);
 	}
 
-	public Integer removeArticlePageById(Integer id) {
-		return articleMapper.deleteArticlePageById(id);
+	public Integer removeArticlePageById(Article article) {
+		userMapper.updateUserArticleCountDec(article.getUid());
+		return articleMapper.deleteArticlePageById(article);
 	}
 
 	public Integer changeArticle(Article article) {
@@ -48,11 +52,11 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	public Integer removeArticleByStar(Integer uid, Integer aid) {
-		// TODO Auto-generated method stub
 		return articleMapper.deleteArticleByStar(uid,aid);
 	}
 
 	public Integer addArticle(Article article) {
+		userMapper.updateUserArticleCountInc(article.getUid());
 		return articleMapper.insertArticle(article);
 	}
 

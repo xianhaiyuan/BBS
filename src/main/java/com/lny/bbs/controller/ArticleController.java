@@ -27,8 +27,8 @@ public class ArticleController {
 		return articlePageService.getPageBean();
 	}
 	@RequestMapping(value="/removeArticleById/post",method= {RequestMethod.POST})
-	public @ResponseBody Integer removeArticlePageById(Integer id){
-		return articleService.removeArticlePageById(id);
+	public @ResponseBody Integer removeArticlePageById(Article article){
+		return articleService.removeArticlePageById(article);
 	}
 	@RequestMapping(value="/changeArticle/post",method= {RequestMethod.POST})
 	public @ResponseBody Integer changeArticle(Article article){

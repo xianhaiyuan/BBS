@@ -130,4 +130,10 @@
 			id = #{id}
 		</where>
 	</update>
+	<update id="updateUserArticleCountInc" parameterType="Integer">
+		update bbs_user set article_count = article_count + 1 where id = #{id}
+	</update>
+	<update id="updateUserArticleCountDec" parameterType="Integer">
+		update bbs_user set article_count = article_count - 1 where id = #{id}
+	</update>
 </mapper>

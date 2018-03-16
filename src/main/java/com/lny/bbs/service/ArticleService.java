@@ -11,7 +11,7 @@ public interface ArticleService {
 
 	List<Article> getArticlePageBySid(pageQueryVo pageQueryVo, Integer sid);
 
-	Integer removeArticlePageById(Integer id);
+	Integer removeArticlePageById(Article article);
 
 	Integer changeArticle(Article article);
 

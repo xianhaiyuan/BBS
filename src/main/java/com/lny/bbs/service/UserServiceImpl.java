@@ -78,5 +78,11 @@ public class UserServiceImpl implements UserService {
 	public Integer changeUserUnaccuse(Integer id) {
 		return UserMapper.updateUserUnaccuse(id);
 	}
+	public Integer changeUserArticleCountInc(Integer id) {
+		return UserMapper.updateUserArticleCountInc(id);
+	}
+	public Integer changeUserArticleCountDec(Integer id) {
+		return UserMapper.updateUserArticleCountDec(id);
+	}
 
 }

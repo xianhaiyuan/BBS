@@ -8,7 +8,7 @@
 		select * from bbs_article where sid = #{sid}
 		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
 	</select>
-	<delete id="deleteArticlePageById" parameterType="Integer">
+	<delete id="deleteArticlePageById" parameterType="article">
 		delete from bbs_article where id = #{id}
 	</delete>
 	<update id="updateArticle">

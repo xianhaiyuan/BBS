@@ -13,7 +13,7 @@ public interface ArticleMapper {
 
 	List<Article> selectArticlePageBySid(@Param("pageQueryVo")pageQueryVo pageQueryVo, @Param("sid")Integer sid);
 
-	Integer deleteArticlePageById(Integer id);
+	Integer deleteArticlePageById(Article article);
 
 	Integer updateArticle(Article article);
 

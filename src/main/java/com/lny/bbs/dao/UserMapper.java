@@ -26,4 +26,6 @@ public interface UserMapper {
 	Integer updateUserBan(Integer id);
 	Integer updateUserAccuse(Integer id);
 	Integer updateUserUnaccuse(Integer id);
+	Integer updateUserArticleCountInc(Integer id);
+	Integer updateUserArticleCountDec(Integer id);
 }

@@ -25,4 +25,6 @@ public interface UserService {
 	Integer changeUserBan(Integer id);
 	Integer changeUserAccuse(Integer id);
 	Integer changeUserUnaccuse(Integer id);
+	Integer changeUserArticleCountInc(Integer id);
+	Integer changeUserArticleCountDec(Integer id);
 }
