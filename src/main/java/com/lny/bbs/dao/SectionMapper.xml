@@ -46,7 +46,7 @@
 	<select id="selectSectionById" parameterType="Integer" resultType="section">
 		select * from bbs_section where id = #{id}
 	</select>
-	<insert id="insertSection" parameterType="section">
+	<insert id="insertSection" parameterType="section" useGeneratedKeys="true">
 		insert into bbs_section(sec_name,sec_label)
 		values(#{sec_name},#{sec_label})
 	</insert>

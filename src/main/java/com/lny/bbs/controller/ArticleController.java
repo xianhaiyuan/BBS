@@ -52,4 +52,8 @@ public class ArticleController {
 	public @ResponseBody Integer removeArticleByStar(Integer uid, Integer aid){
 		return articleService.removeArticleByStar(uid, aid);
 	}
+	@RequestMapping(value="/addArticle/post",method= {RequestMethod.POST})
+	public @ResponseBody Integer addArticle(Article article){
+		return articleService.addArticle(article);
+	}
 }

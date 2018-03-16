@@ -50,4 +50,8 @@
 	<delete id="deleteArticleByStar">
 		delete from bbs_star where uid = #{0} and aid = #{1}
 	</delete>
+	<insert id="insertArticle" useGeneratedKeys="true" parameterType="article">
+		insert into bbs_article(title,content,uid,author,date,sid) 
+		values(#{title},#{content},#{uid},#{author},#{date},#{sid})
+	</insert>
 </mapper>

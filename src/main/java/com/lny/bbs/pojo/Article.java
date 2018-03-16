@@ -9,7 +9,7 @@ public class Article implements Serializable {
 	private Integer id;
 	private String content;
 	private Integer uid;
-	private Date date;
+	private String date;
 	private String author;
 	private String art_label;
 	private Integer sid;
@@ -69,10 +69,10 @@ public class Article implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

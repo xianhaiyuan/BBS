@@ -52,4 +52,8 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.deleteArticleByStar(uid,aid);
 	}
 
+	public Integer addArticle(Article article) {
+		return articleMapper.insertArticle(article);
+	}
+
 }

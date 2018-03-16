@@ -27,4 +27,6 @@ public interface ArticleMapper {
 
 	Integer deleteArticleByStar(Integer uid, Integer aid);
 
+	Integer insertArticle(Article article);
+
 }

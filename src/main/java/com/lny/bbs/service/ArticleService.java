@@ -25,4 +25,6 @@ public interface ArticleService {
 
 	Integer removeArticleByStar(Integer uid, Integer aid);
 
+	Integer addArticle(Article article);
+
 }
