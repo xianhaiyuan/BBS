@@ -33,4 +33,23 @@ public class CommentController {
 		commentPageService.setPageBeanData(commentService.getCommentPageByAid(commentPageService.getPageQueryVo(),aid));
 		return commentPageService.getPageBean();
 	}
+	@RequestMapping(value="/commentPageByUid/get",method= {RequestMethod.GET})
+	public @ResponseBody PageBean<CommentVo> commentPageByUid(Integer uid, Integer currentPage){
+		commentPageService.setPageBeanTotalCount(commentService.getCommentCountByUid(uid));
+		commentPageService.initCommentPageQueryVo(currentPage,2);
+		commentPageService.setPageBeanData(commentService.getCommentPageByUid(commentPageService.getPageQueryVo(),uid));
+		return commentPageService.getPageBean();
+	}
+	@RequestMapping(value="/commentPraise/post",method={RequestMethod.POST})
+	public @ResponseBody Integer commentPraise(Integer id) throws IllegalStateException, IOException {
+		return commentService.changeCommentPraise(id);
+	}
+	@RequestMapping(value="/commentBlame/post",method={RequestMethod.POST})
+	public @ResponseBody Integer commentBlame(Integer id) throws IllegalStateException, IOException {
+		return commentService.changeCommentBlame(id);
+	}
+	@RequestMapping(value="/removeCommentById/post",method={RequestMethod.POST})
+	public @ResponseBody Integer removeCommentById(Comment comment) throws IllegalStateException, IOException {
+		return commentService.removeCommentById(comment);
+	}
 }

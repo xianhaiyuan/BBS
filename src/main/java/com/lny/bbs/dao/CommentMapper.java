@@ -16,4 +16,14 @@ public interface CommentMapper {
 
 	List<CommentVo> selectCommentPageByAid(@Param("pageQueryVo")pageQueryVo pageQueryVo, @Param("aid")Integer aid);
 
+	Integer updateCommentPraise(Integer id);
+
+	Integer updateCommentBlame(Integer id);
+
+	Integer selectCommentCountByUid(Integer uid);
+
+	List<CommentVo> selectCommentPageByUid(@Param("pageQueryVo")pageQueryVo pageQueryVo, @Param("uid")Integer uid);
+
+	Integer deleteCommentById(Comment comment);
+
 }

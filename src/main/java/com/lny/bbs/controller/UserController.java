@@ -42,8 +42,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login/post",method={RequestMethod.POST})
-	public @ResponseBody User login(String username, String passwd,HttpSession session) throws IllegalStateException, IOException {
-		User user = userService.queryUser(username, passwd); 
+	public @ResponseBody User login(User userFrom,HttpSession session) throws IllegalStateException, IOException {
+		User user = userService.queryUser(userFrom.getUsername(), userFrom.getPasswd()); 
 		if(user != null) {
 			session.setAttribute("user", user);
 			userService.setOnline(user.getId());

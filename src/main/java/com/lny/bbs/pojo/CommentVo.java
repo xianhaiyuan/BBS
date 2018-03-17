@@ -12,12 +12,14 @@ public class CommentVo implements Serializable {
 	private String comment;
 	private Integer uid;
 	private Integer aid;
+	private Integer sid;
 	private String date;
 	private String author;
 	private Integer praise;
 	private Integer blame;
 	private String from_content;
 	private String from_nickname;
+	private String title;
 	private String grade;
 	private Integer article_count;
 	public Integer getId() {
@@ -94,6 +96,18 @@ public class CommentVo implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Integer getSid() {
+		return sid;
+	}
+	public void setSid(Integer sid) {
+		this.sid = sid;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

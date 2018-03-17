@@ -14,4 +14,14 @@ public interface CommentService {
 
 	List<CommentVo> getCommentPageByAid(pageQueryVo pageQueryVo, Integer aid);
 
+	Integer changeCommentPraise(Integer id);
+
+	Integer changeCommentBlame(Integer id);
+
+	Integer getCommentCountByUid(Integer uid);
+
+	List<CommentVo> getCommentPageByUid(pageQueryVo pageQueryVo, Integer uid);
+
+	Integer removeCommentById(Comment comment);
+
 }

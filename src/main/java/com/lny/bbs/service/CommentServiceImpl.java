@@ -26,4 +26,23 @@ public class CommentServiceImpl implements CommentService {
 	public List<CommentVo> getCommentPageByAid(pageQueryVo pageQueryVo, Integer aid) {
 		return commentMapper.selectCommentPageByAid(pageQueryVo,aid);
 	}
+
+	public Integer changeCommentPraise(Integer id) {
+		return commentMapper.updateCommentPraise(id);
+	}
+
+	public Integer changeCommentBlame(Integer id) {
+		return commentMapper.updateCommentBlame(id);
+	}
+
+	public Integer getCommentCountByUid(Integer uid) {
+		return commentMapper.selectCommentCountByUid(uid);
+	}
+	public List<CommentVo> getCommentPageByUid(pageQueryVo pageQueryVo, Integer uid) {
+		return commentMapper.selectCommentPageByUid(pageQueryVo,uid);
+	}
+
+	public Integer removeCommentById(Comment comment) {
+		return commentMapper.deleteCommentById(comment);
+	}
 }

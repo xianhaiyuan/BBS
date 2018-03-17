@@ -11,6 +11,7 @@ public class Comment implements Serializable {
 	private String comment;
 	private Integer uid;
 	private Integer aid;
+	private Integer sid;
 	private String date;
 	private String author;
 	private Integer praise;
@@ -79,5 +80,11 @@ public class Comment implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Integer getSid() {
+		return sid;
+	}
+	public void setSid(Integer sid) {
+		this.sid = sid;
 	}
 }

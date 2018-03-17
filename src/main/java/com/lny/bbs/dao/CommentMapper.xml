@@ -3,9 +3,8 @@
 <mapper namespace="com.lny.bbs.dao.CommentMapper" >
 	<insert id="insertComment" parameterType="comment">
 		insert into bbs_comment
-		<!-- (comment,uid,aid,date,author,) -->
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			comment,uid,aid,date,author,
+			comment,uid,aid,date,author,sid,
 			<if test="from_content != null">
 				from_content,
 			</if>
@@ -14,7 +13,7 @@
 			</if>
 		</trim>
 		<trim prefix="values(" suffix=")" suffixOverrides=",">
-			#{comment},#{uid},#{aid},#{date},#{author},
+			#{comment},#{uid},#{aid},#{date},#{author},#{sid},
 			<if test="from_content != null">
 				#{from_content},
 			</if>
@@ -26,12 +25,44 @@
 	<select id="selectCommentCountByAid" parameterType="Integer" resultType="Integer">
 		select count(1) from bbs_comment where aid = #{aid}
 	</select>
+	<select id="selectCommentCountByUid" parameterType="Integer" resultType="Integer">
+		select count(1) from bbs_comment where uid = #{uid}
+	</select>
 	<select id="selectCommentPageByAid" parameterType="pageQueryVo" resultType="commentVo">
-		select c.id,c.comment,c.date,c.author,c.uid,c.aid,c.praise,c.blame,
-		c.from_content,c.from_nickname,u.grade,u.article_count 
-		from bbs_comment c left join bbs_user u on c.uid = u.id
-		 where c.aid = #{aid}
+		select c.id,c.comment,c.date,c.author,c.uid,c.aid,c.sid,c.praise,c.blame,
+		c.from_content,c.from_nickname,u.grade,u.article_count,a.title
+		from bbs_article a,bbs_comment c left join bbs_user u on c.uid = u.id
+		 where c.aid = #{aid} and c.aid = a.id
 		order by date asc
 		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
 	</select>
+	<select id="selectCommentPageByUid" parameterType="pageQueryVo" resultType="commentVo">
+		select c.id,c.comment,c.date,c.author,c.uid,c.aid,c.sid,c.praise,c.blame,
+		c.from_content,c.from_nickname,u.grade,u.article_count,a.title
+		from bbs_article a,bbs_comment c left join bbs_user u on c.uid = u.id
+		 where c.uid = #{uid} and c.aid = a.id
+		order by date asc
+		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
+	</select>
+	<update id="updateCommentPraise" parameterType="Integer">
+		update bbs_comment
+		<set>
+			praise = praise + 1		
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+	<update id="updateCommentBlame" parameterType="Integer">
+		update bbs_comment
+		<set>
+			blame = blame + 1		
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+	<delete id="deleteCommentById" parameterType="comment">
+		delete from bbs_comment where id = #{id}
+	</delete>
 </mapper>
