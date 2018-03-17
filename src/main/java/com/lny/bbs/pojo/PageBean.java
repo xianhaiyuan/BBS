@@ -12,7 +12,7 @@ public class PageBean<T> implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	//当前页
-	private Integer currentPage;
+	private Integer currentPage = 1;
 	//每页多少条
 	private Integer pageSize = 2;
 	//总条数

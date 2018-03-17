@@ -15,6 +15,13 @@ public class PageServiceImpl<T> implements PageService<T> {
 	@Autowired
 	private PageBean<T> pageBean;
 	public void initPageQueryVo(Integer currentPage) {
+		this.pageBean.setCurrentPage(currentPage);
+		this.pageQueryVo.setPageSize(this.pageBean.getPageSize());
+		this.pageQueryVo.setStartIndex( (currentPage-1) * this.pageBean.getPageSize() );
+	}
+	public void initCommentPageQueryVo(Integer currentPage, Integer pageSize) {
+		this.pageBean.setCurrentPage(currentPage);
+		this.pageBean.setPageSize(pageSize);
 		this.pageQueryVo.setPageSize(this.pageBean.getPageSize());
 		this.pageQueryVo.setStartIndex( (currentPage-1) * this.pageBean.getPageSize() );
 	}

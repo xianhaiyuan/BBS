@@ -23,4 +23,15 @@
 			</if>
 		</trim>
 	</insert>
+	<select id="selectCommentCountByAid" parameterType="Integer" resultType="Integer">
+		select count(1) from bbs_comment where aid = #{aid}
+	</select>
+	<select id="selectCommentPageByAid" parameterType="pageQueryVo" resultType="commentVo">
+		select c.id,c.comment,c.date,c.author,c.uid,c.aid,c.praise,c.blame,
+		c.from_content,c.from_nickname,u.grade,u.article_count 
+		from bbs_comment c left join bbs_user u on c.uid = u.id
+		 where c.aid = #{aid}
+		order by date asc
+		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
+	</select>
 </mapper>
