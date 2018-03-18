@@ -66,7 +66,10 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	public Integer addArticleStar(Integer uid, Integer aid) {
-		return articleMapper.insertArticleStar(uid,aid);
+		if(articleMapper.queryArticleStar(uid,aid)==0) {
+			return articleMapper.insertArticleStar(uid,aid);
+		}
+		return -1;
 	}
 
 }

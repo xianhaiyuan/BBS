@@ -62,4 +62,7 @@
 	<insert id="insertArticleStar">
 		insert into bbs_star(uid,aid) values(#{0},#{1})
 	</insert>
+	<select id="queryArticleStar" resultType="Integer">
+		select count(1) from bbs_star where uid = #{0} and aid =#{1}
+	</select>
 </mapper>

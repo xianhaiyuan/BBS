@@ -34,4 +34,6 @@ public interface ArticleMapper {
 
 	Integer insertArticleStar(Integer uid, Integer aid);
 
+	Integer queryArticleStar(Integer uid, Integer aid);
+
 }
