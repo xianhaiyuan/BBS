@@ -35,7 +35,4 @@
 		<property name="basePackage" value="com.lny.bbs.dao" />
 	</bean>
 	
-	
-	
-	
 </beans>
