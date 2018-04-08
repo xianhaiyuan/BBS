@@ -1,6 +1,8 @@
 package com.lny.bbs.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
@@ -81,7 +83,13 @@ public class ArticleController {
 	public @ResponseBody PageBean<Article> searchArticle(String keyword,int currentPage){
 		SolrQuery query = new SolrQuery();
 		PageBean<Article> pageBean = new PageBean<Article>();
-		query.setQuery("article_keywords:"+keyword);
+		query.set("df", "article_keywords");
+		if(!keyword.equals("") && keyword != null) {
+			query.set("q","article_keywords:"+keyword);
+		}else {
+			query.setQuery("*:*");
+			query.set("fl","article_id,article_sid,article_art_label,article_title,article_date,article_author,article_content");
+		}
 		try {
 			QueryResponse queryTotal = httpSolrServer.query(query);
 			SolrDocumentList results = queryTotal.getResults();
@@ -102,22 +110,18 @@ public class ArticleController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(queryResponse);
 		if(queryResponse != null) {
 			SolrDocumentList docs = queryResponse.getResults();
-//			System.out.println("docs:"+docs);
 			for (SolrDocument doc : docs) {
 				Article article = new Article();
 				article.setId((Integer)doc.get("article_id"));
+				article.setSid((Integer)doc.get("article_sid"));
 				article.setArt_label((String)doc.get("article_art_label"));
 				article.setTitle((String)doc.get("article_title"));
 				article.setContent((String)doc.get("article_content"));
 				article.setDate((String)doc.get("article_date"));
 				article.setAuthor((String)doc.get("article_author"));
 				pageBean.getPageData().add(article);
-				System.out.println("date:"+doc.get("article_date"));
-				System.out.println("title:"+doc.get("article_title"));
-				System.out.println("content:"+doc.get("article_content"));
 			}
 			return pageBean;
 		}
