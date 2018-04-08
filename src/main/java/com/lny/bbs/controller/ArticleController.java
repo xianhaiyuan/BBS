@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.HtmlUtils;
 
 import com.lny.bbs.pojo.Article;
 import com.lny.bbs.pojo.ArticleVo;
@@ -103,6 +104,11 @@ public class ArticleController {
 		query.addSort("article_date",ORDER.desc);
 		query.setStart((currentPage-1)*pageBean.getPageSize());
 		query.setRows(pageBean.getPageSize());
+		query.setHighlight(true);
+		query.addHighlightField("article_content");
+		query.addHighlightField("article_title");
+		query.setHighlightSimplePre("<span style='color:red'>");
+		query.setHighlightSimplePost("</span>");
 		QueryResponse queryResponse = null;
 		try {
 			queryResponse = httpSolrServer.query(query);
@@ -112,13 +118,28 @@ public class ArticleController {
 		}
 		if(queryResponse != null) {
 			SolrDocumentList docs = queryResponse.getResults();
+			Map<String, Map<String, List<String>>> highlighting = queryResponse.getHighlighting();
 			for (SolrDocument doc : docs) {
 				Article article = new Article();
 				article.setId((Integer)doc.get("article_id"));
 				article.setSid((Integer)doc.get("article_sid"));
 				article.setArt_label((String)doc.get("article_art_label"));
-				article.setTitle((String)doc.get("article_title"));
-				article.setContent((String)doc.get("article_content"));
+				Map<String, List<String>> map = highlighting.get(doc.get("id"));
+				if(map!=null) {
+					if(map.get("article_title")!=null) {
+						article.setTitle(map.get("article_title").get(0));
+					}else {
+						article.setTitle((String)doc.get("article_title"));
+					}
+					if(map.get("article_content")!=null) {
+						article.setContent(map.get("article_content").get(0));
+					}else {
+						article.setContent((String)doc.get("article_content"));
+					}
+				}else {
+					article.setTitle((String)doc.get("article_title"));
+					article.setContent((String)doc.get("article_content"));
+				}
 				article.setDate((String)doc.get("article_date"));
 				article.setAuthor((String)doc.get("article_author"));
 				pageBean.getPageData().add(article);

@@ -21,10 +21,11 @@ public class MyTest {
 		SolrServer solrServer = new HttpSolrServer(baseURL);
 		SolrQuery solrQuery = new SolrQuery();
 //		solrQuery.setQuery("*:*");
-		solrQuery.set("q","article_keywords:content");
-		solrQuery.setFields("article_title");
+		solrQuery.set("q","article_keywords:羽毛球");
+//		solrQuery.setFields("article_content");
 		solrQuery.setHighlight(true);
 		solrQuery.addHighlightField("article_content");
+		solrQuery.addHighlightField("article_title");
 		solrQuery.setHighlightSimplePre("<span style='color:red'>");
 		solrQuery.setHighlightSimplePost("</span>");
 		QueryResponse queryResponse = solrServer.query(solrQuery);
