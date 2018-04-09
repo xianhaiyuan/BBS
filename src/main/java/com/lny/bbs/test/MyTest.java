@@ -1,5 +1,6 @@
 package com.lny.bbs.test;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class MyTest {
 
 	@SuppressWarnings("unlikely-arg-type")
 	@Test
-	public void test() throws SolrServerException {
+	public void test() throws SolrServerException, IOException {
 		String baseURL = "http://localhost:8081/solr/collection1";
 		SolrServer solrServer = new HttpSolrServer(baseURL);
 		SolrQuery solrQuery = new SolrQuery();
@@ -30,6 +31,7 @@ public class MyTest {
 		solrQuery.setHighlightSimplePost("</span>");
 		QueryResponse queryResponse = solrServer.query(solrQuery);
 		System.out.println(queryResponse);
+		System.out.println(solrServer.deleteByQuery("article_sid:1", 1000).getQTime());
 		SolrDocumentList docs = queryResponse.getResults();
 //		System.out.println(docs);
 		Map<String, Map<String, List<String>>> highlighting = queryResponse.getHighlighting();

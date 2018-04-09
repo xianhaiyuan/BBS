@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lny.bbs.pojo.Article;
 import com.lny.bbs.pojo.Comment;
 import com.lny.bbs.pojo.CommentVo;
 import com.lny.bbs.pojo.PageBean;

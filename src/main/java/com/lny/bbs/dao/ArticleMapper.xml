@@ -8,10 +8,10 @@
 		select * from bbs_article where sid = #{sid}
 		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
 	</select>
-	<delete id="deleteArticlePageById" parameterType="article">
+	<delete id="deleteArticleById" parameterType="article">
 		delete from bbs_article where id = #{id}
 	</delete>
-	<update id="updateArticle">
+	<update id="updateArticle" parameterType="article">
 		update bbs_article
 		<set>
 			<if test="art_label != null">
@@ -51,6 +51,9 @@
 		delete from bbs_star where uid = #{0} and aid = #{1}
 	</delete>
 	<insert id="insertArticle" useGeneratedKeys="true" parameterType="article">
+		<selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 		insert into bbs_article(title,content,uid,author,date,sid) 
 		values(#{title},#{content},#{uid},#{author},#{date},#{sid})
 	</insert>
@@ -65,4 +68,13 @@
 	<select id="queryArticleStar" resultType="Integer">
 		select count(1) from bbs_star where uid = #{0} and aid =#{1}
 	</select>
+	<update id="updateArticleCount" parameterType="Integer">
+		update bbs_article
+		<set>
+			reply_count = reply_count + 1
+		</set>
+		<where>
+			id = #{aid}
+		</where>
+	</update>
 </mapper>

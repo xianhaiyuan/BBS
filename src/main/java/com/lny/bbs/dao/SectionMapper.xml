@@ -23,7 +23,6 @@
 		a.id aid,a.content,a.uid,a.date,a.author,a.art_label,a.sid,a.reply_count,a.title
 		from bbs_section s left join bbs_article a on s.id = a.sid 
 		order by art_label desc,date desc
-		limit 10
 	</select>
  	<select id="selectSectionPage" parameterType="pageQueryVo" resultType="section">
 		select * from bbs_section limit #{startIndex},#{pageSize}

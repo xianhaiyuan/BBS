@@ -27,9 +27,9 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.selectArticlePageBySid(pageQueryVo, sid);
 	}
 
-	public Integer removeArticlePageById(Article article) {
+	public Integer removeArticleById(Article article) {
 		userMapper.updateUserArticleCountDec(article.getUid());
-		return articleMapper.deleteArticlePageById(article);
+		return articleMapper.deleteArticleById(article);
 	}
 
 	public Integer changeArticle(Article article) {

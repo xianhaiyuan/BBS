@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lny.bbs.dao.ArticleMapper;
 import com.lny.bbs.dao.CommentMapper;
 import com.lny.bbs.pojo.Comment;
 import com.lny.bbs.pojo.CommentVo;
@@ -14,8 +15,11 @@ import com.lny.bbs.pojo.pageQueryVo;
 public class CommentServiceImpl implements CommentService {
 	@Autowired
 	private CommentMapper commentMapper;
-
+	@Autowired
+	private ArticleMapper articleMapper;
+	
 	public Integer addComment(Comment comment) {
+		articleMapper.updateArticleCount(comment.getAid());
 		return commentMapper.insertComment(comment);
 	}
 

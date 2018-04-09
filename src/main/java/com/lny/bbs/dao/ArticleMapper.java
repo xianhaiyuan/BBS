@@ -14,7 +14,7 @@ public interface ArticleMapper {
 
 	List<Article> selectArticlePageBySid(@Param("pageQueryVo")pageQueryVo pageQueryVo, @Param("sid")Integer sid);
 
-	Integer deleteArticlePageById(Article article);
+	Integer deleteArticleById(Article article);
 
 	Integer updateArticle(Article article);
 
@@ -35,5 +35,7 @@ public interface ArticleMapper {
 	Integer insertArticleStar(Integer uid, Integer aid);
 
 	Integer queryArticleStar(Integer uid, Integer aid);
+
+	void updateArticleCount(Integer aid);
 
 }

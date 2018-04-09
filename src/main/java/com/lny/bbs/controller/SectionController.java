@@ -12,6 +12,7 @@ import com.lny.bbs.pojo.PageBean;
 import com.lny.bbs.pojo.Section;
 import com.lny.bbs.pojo.SectionVo;
 import com.lny.bbs.service.SectionService;
+import com.lny.bbs.service.SolrService;
 import com.lny.bbs.service.PageService;
 
 @Controller
@@ -20,6 +21,8 @@ public class SectionController {
 	private SectionService sectionService;
 	@Autowired
 	private PageService<Section> pageService;
+	@Autowired
+	private SolrService solrService;
 	
 	@RequestMapping(value="/AllSection/get",method={RequestMethod.GET})
 	public @ResponseBody List<SectionVo> section() throws IllegalStateException, IOException {
@@ -42,7 +45,11 @@ public class SectionController {
 	}
 	@RequestMapping(value="/deleteSection/post",method={RequestMethod.POST})
 	public @ResponseBody Integer removeSectionPage(Section sectionForm) throws IllegalStateException, IOException {
-		return sectionService.removeSection(sectionForm);
+		if(sectionService.removeSection(sectionForm) > 0) {
+			solrService.removeArticleBySid(sectionForm.getId());
+			return 1;
+		}
+		return 0;
 	}
 	@RequestMapping(value="/sectionByUid/get",method={RequestMethod.GET})
 	public @ResponseBody Section sectionByUid(Integer uid) throws IllegalStateException, IOException {
