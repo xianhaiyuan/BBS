@@ -28,4 +28,5 @@ public interface UserMapper {
 	Integer updateUserUnaccuse(Integer id);
 	Integer updateUserArticleCountInc(Integer id);
 	Integer updateUserArticleCountDec(Integer id);
+	Integer checkOnline(Integer id);
 }

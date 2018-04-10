@@ -144,4 +144,8 @@ public class UserController {
 	public @ResponseBody User userById(Integer id) throws IllegalStateException, IOException {	
 		return userService.getUserById(id);
 	}
+	@RequestMapping(value="/checkOnline/get",method={RequestMethod.GET})
+	public @ResponseBody Integer checkOnline(Integer id) throws IllegalStateException, IOException {	
+		return userService.checkOnline(id);
+	}
 }

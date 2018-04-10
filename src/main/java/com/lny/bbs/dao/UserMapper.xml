@@ -136,4 +136,7 @@
 	<update id="updateUserArticleCountDec" parameterType="Integer">
 		update bbs_user set article_count = article_count - 1 where id = #{id}
 	</update>
+	<select id="checkOnline" parameterType="Integer" resultType="Integer">
+		select count(1) from bbs_user where id = #{id} and online = 1
+	</select>
 </mapper>

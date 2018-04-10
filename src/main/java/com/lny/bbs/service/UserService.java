@@ -27,4 +27,5 @@ public interface UserService {
 	Integer changeUserUnaccuse(Integer id);
 	Integer changeUserArticleCountInc(Integer id);
 	Integer changeUserArticleCountDec(Integer id);
+	Integer checkOnline(Integer id);
 }

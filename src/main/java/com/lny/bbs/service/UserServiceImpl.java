@@ -84,5 +84,9 @@ public class UserServiceImpl implements UserService {
 	public Integer changeUserArticleCountDec(Integer id) {
 		return UserMapper.updateUserArticleCountDec(id);
 	}
+	public Integer checkOnline(Integer id) {
+		// TODO Auto-generated method stub
+		return UserMapper.checkOnline(id);
+	}
 
 }
