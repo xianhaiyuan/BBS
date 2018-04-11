@@ -1,6 +1,8 @@
 package com.lny.bbs.dao;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lny.bbs.pojo.User;
 import com.lny.bbs.pojo.UserSectionVo;
 import com.lny.bbs.pojo.pageQueryVo;
@@ -29,4 +31,9 @@ public interface UserMapper {
 	Integer updateUserArticleCountInc(Integer id);
 	Integer updateUserArticleCountDec(Integer id);
 	Integer checkOnline(Integer id);
+	Integer queryFriend(Integer uid, Integer fid);
+	Integer insertFriend(Integer uid, Integer fid);
+	Integer deleteFriend(Integer uid, Integer fid);
+	Integer queryFriendCountByUid(Integer uid);
+	List<User> selectFriendPageByUid(@Param("pageQueryVo")pageQueryVo pageQueryVo, @Param("uid")Integer uid);
 }

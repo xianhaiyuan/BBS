@@ -28,4 +28,8 @@ public interface UserService {
 	Integer changeUserArticleCountInc(Integer id);
 	Integer changeUserArticleCountDec(Integer id);
 	Integer checkOnline(Integer id);
+	Integer addFriend(Integer uid, Integer fid);
+	Integer removeFriend(Integer uid, Integer fid);
+	Integer queryFriendCountByUid(Integer uid);
+	List<User> getFriendPageByUid(pageQueryVo pageQueryVo, Integer uid);
 }

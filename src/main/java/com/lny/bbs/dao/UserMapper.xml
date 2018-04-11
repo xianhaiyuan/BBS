@@ -139,4 +139,21 @@
 	<select id="checkOnline" parameterType="Integer" resultType="Integer">
 		select count(1) from bbs_user where id = #{id} and online = 1
 	</select>
+	<select id="queryFriend" resultType="Integer">
+		select count(1) from bbs_friend where uid = #{0} and fid = #{1}
+	</select>
+	<insert id="insertFriend">
+		insert into bbs_friend(uid,fid) values(#{0},#{1})
+	</insert>
+	<delete id="deleteFriend">
+		delete from bbs_friend where uid = #{0} and fid = #{1}
+	</delete>
+	<select id="queryFriendCountByUid" resultType="Integer" parameterType="Integer">
+		select count(1) from bbs_friend where uid = #{uid}
+	</select>
+	<select id="selectFriendPageByUid" parameterType="pageQueryVo" resultType="user">
+		select u.id,u.nickname,u.online from bbs_user u
+		left join bbs_friend f on u.id = f.fid where f.uid = #{uid}
+		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
+	</select>
 </mapper>

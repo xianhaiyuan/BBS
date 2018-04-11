@@ -21,7 +21,7 @@
 		select
 		s.id,s.sec_name,s.sec_label,s.uid,
 		a.id aid,a.content,a.uid,a.date,a.author,a.art_label,a.sid,a.reply_count,a.title
-		from bbs_section s left join bbs_article a on s.id = a.sid 
+		from bbs_section s left join bbs_article a on s.id = a.sid
 		order by art_label desc,date desc
 	</select>
  	<select id="selectSectionPage" parameterType="pageQueryVo" resultType="section">

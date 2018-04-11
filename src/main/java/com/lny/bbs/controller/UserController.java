@@ -148,4 +148,19 @@ public class UserController {
 	public @ResponseBody Integer checkOnline(Integer id) throws IllegalStateException, IOException {	
 		return userService.checkOnline(id);
 	}
+	@RequestMapping(value="/addFriend/post",method={RequestMethod.POST})
+	public @ResponseBody Integer addFriend(Integer uid,Integer fid) throws IllegalStateException, IOException {	
+		return userService.addFriend(uid,fid);
+	}
+	@RequestMapping(value="/removeFriend/post",method={RequestMethod.POST})
+	public @ResponseBody Integer removeFriend(Integer uid,Integer fid) throws IllegalStateException, IOException {	
+		return userService.removeFriend(uid,fid);
+	}
+	@RequestMapping(value="/friendPageByUid/get",method={RequestMethod.GET})
+	public @ResponseBody PageBean<User> getFriendCountByUid(Integer uid,Integer currentPage) throws IllegalStateException, IOException {	
+		userPageService.setPageBeanTotalCount(userService.queryFriendCountByUid(uid));
+		userPageService.initPageQueryVo(currentPage);
+		userPageService.setPageBeanData(userService.getFriendPageByUid(userPageService.getPageQueryVo(),uid));
+		return userPageService.getPageBean();
+	}
 }
