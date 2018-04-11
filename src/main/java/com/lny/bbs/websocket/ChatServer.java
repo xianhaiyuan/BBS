@@ -22,9 +22,8 @@ public class ChatServer {
     @OnOpen
     public void onOpen(Session session){
 //    	System.out.println(session.getId());
-    	
         room.addElement(session);
-        System.out.println(room.size());
+//        System.out.println(room.size());
     }
     /**
      * 接收到来自用户的消息
@@ -51,7 +50,7 @@ public class ChatServer {
      */
     @OnClose
     public void onClose(Session session){
-    	System.out.println("remove");
+//    	System.out.println("remove");
         room.remove(session);
     }
     /**
