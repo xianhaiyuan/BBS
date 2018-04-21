@@ -15,6 +15,8 @@ public class Article implements Serializable {
 	private Integer sid;
 	private Integer reply_count;
 	private String title;
+	private Integer praise;
+	private Integer blame;
 	public Integer getId() {
 		return id;
 	}
@@ -74,6 +76,18 @@ public class Article implements Serializable {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public Integer getPraise() {
+		return praise;
+	}
+	public void setPraise(Integer praise) {
+		this.praise = praise;
+	}
+	public Integer getBlame() {
+		return blame;
+	}
+	public void setBlame(Integer blame) {
+		this.blame = blame;
 	}
 	
 }

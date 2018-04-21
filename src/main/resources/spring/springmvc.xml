@@ -10,8 +10,6 @@
 	<context:component-scan base-package="com.lny.bbs.controller" />
 	<!-- 配置注解驱动 -->
 	<mvc:annotation-driven />
-	
-	
 	<!-- 配置视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 前缀 -->
@@ -19,15 +17,12 @@
 		<!-- 后缀 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="5000000"></property>
 	</bean>
-	
   	 <mvc:cors>
  	   <mvc:mapping path="/**" allow-credentials="true" max-age="3600"/>
 	</mvc:cors> 
-	
 	<!-- 对静态资源放行  -->
 	<mvc:resources location="/css/" mapping="/css/**"/>
 	<mvc:resources location="/js/" mapping="/js/**"/>

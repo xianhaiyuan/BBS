@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lny.bbs.pojo.Article;
 import com.lny.bbs.pojo.ArticleVo;
+import com.lny.bbs.pojo.StarArticle;
 import com.lny.bbs.pojo.pageQueryVo;
 
 public interface ArticleMapper {
@@ -24,7 +25,7 @@ public interface ArticleMapper {
 
 	Integer queryArticleCountByStar(Integer uid);
 
-	List<Article> selectArticlePageByStar(@Param("pageQueryVo")pageQueryVo pageQueryVo, @Param("uid")Integer uid);
+	List<StarArticle> selectArticlePageByStar(@Param("pageQueryVo")pageQueryVo pageQueryVo, @Param("uid")Integer uid);
 
 	Integer deleteArticleByStar(Integer uid, Integer aid);
 
@@ -32,10 +33,14 @@ public interface ArticleMapper {
 
 	ArticleVo selectArticleBySidAid(Integer sid, Integer aid);
 
-	Integer insertArticleStar(Integer uid, Integer aid);
+	Integer insertArticleStar(Integer uid, Integer aid, String date);
 
 	Integer queryArticleStar(Integer uid, Integer aid);
 
 	void updateArticleCount(Integer aid);
+
+	Integer updateArticlePraise(Integer id);
+
+	Integer updateArticleBlame(Integer id);
 
 }

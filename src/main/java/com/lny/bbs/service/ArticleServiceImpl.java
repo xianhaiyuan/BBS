@@ -9,6 +9,7 @@ import com.lny.bbs.dao.ArticleMapper;
 import com.lny.bbs.dao.UserMapper;
 import com.lny.bbs.pojo.Article;
 import com.lny.bbs.pojo.ArticleVo;
+import com.lny.bbs.pojo.StarArticle;
 import com.lny.bbs.pojo.pageQueryVo;
 
 @Service
@@ -18,7 +19,7 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleMapper articleMapper;
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	public Integer getArticleCountBySid(Integer sid) {
 		return articleMapper.queryArticleCountBySid(sid);
 	}
@@ -48,12 +49,12 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.queryArticleCountByStar(uid);
 	}
 
-	public List<Article> getArticlePageByStar(pageQueryVo pageQueryVo, Integer uid) {
+	public List<StarArticle> getArticlePageByStar(pageQueryVo pageQueryVo, Integer uid) {
 		return articleMapper.selectArticlePageByStar(pageQueryVo, uid);
 	}
 
 	public Integer removeArticleByStar(Integer uid, Integer aid) {
-		return articleMapper.deleteArticleByStar(uid,aid);
+		return articleMapper.deleteArticleByStar(uid, aid);
 	}
 
 	public Integer addArticle(Article article) {
@@ -62,14 +63,22 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	public ArticleVo getArticleBySidAid(Integer sid, Integer aid) {
-		return articleMapper.selectArticleBySidAid(sid,aid);
+		return articleMapper.selectArticleBySidAid(sid, aid);
 	}
 
-	public Integer addArticleStar(Integer uid, Integer aid) {
-		if(articleMapper.queryArticleStar(uid,aid)==0) {
-			return articleMapper.insertArticleStar(uid,aid);
+	public Integer addArticleStar(Integer uid, Integer aid, String date) {
+		if (articleMapper.queryArticleStar(uid, aid) == 0) {
+			return articleMapper.insertArticleStar(uid, aid, date);
 		}
 		return -1;
+	}
+
+	public Integer changeArticlePraise(Integer id) {
+		return articleMapper.updateArticlePraise(id);
+	}
+
+	public Integer changeArticleBlame(Integer id) {
+		return articleMapper.updateArticleBlame(id);
 	}
 
 }

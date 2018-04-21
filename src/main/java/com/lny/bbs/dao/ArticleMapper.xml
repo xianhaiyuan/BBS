@@ -40,10 +40,10 @@
 		left join bbs_star s on a.id = s.aid 
 		left join bbs_user u on u.id = s.uid where u.id = #{uid}
 	</select>
-	<select id="selectArticlePageByStar" parameterType="pageQueryVo" resultType="article">
-		select a.id,a.content,a.uid,a.date,a.author,a.art_label,a.sid,a.reply_count,a.title 
-		from bbs_article a 
-		left join bbs_star s on a.id = s.aid 
+	<select id="selectArticlePageByStar" parameterType="pageQueryVo" resultType="starArticle">
+		select a.id,a.content,a.uid,a.date,a.author,a.art_label,a.sid,a.reply_count,a.title,s.star_date
+		from bbs_article a
+		left join bbs_star s on a.id = s.aid
 		left join bbs_user u on u.id = s.uid where u.id = #{uid}
 		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
 	</select>
@@ -58,12 +58,12 @@
 		values(#{title},#{content},#{uid},#{author},#{date},#{sid})
 	</insert>
 	<select id="selectArticleBySidAid" resultType="articleVo">
-		select a.id,a.content,a.uid,a.date,a.author,a.art_label,a.title,
+		select a.id,a.content,a.uid,a.date,a.author,a.art_label,a.title,a.praise,a.blame,
 		u.grade,u.article_count from bbs_article a left join bbs_user u on
 		a.uid = u.id where a.id = #{1} and a.sid = #{0}
 	</select>
 	<insert id="insertArticleStar">
-		insert into bbs_star(uid,aid) values(#{0},#{1})
+		insert into bbs_star(uid,aid,star_date) values(#{0},#{1},#{2})
 	</insert>
 	<select id="queryArticleStar" resultType="Integer">
 		select count(1) from bbs_star where uid = #{0} and aid =#{1}
@@ -75,6 +75,24 @@
 		</set>
 		<where>
 			id = #{aid}
+		</where>
+	</update>
+	<update id="updateArticlePraise" parameterType="Integer">
+		update bbs_article
+		<set>
+			praise = praise + 1
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+	<update id="updateArticleBlame" parameterType="Integer">
+		update bbs_article
+		<set>
+			blame = blame + 1
+		</set>
+		<where>
+			id = #{id}
 		</where>
 	</update>
 </mapper>

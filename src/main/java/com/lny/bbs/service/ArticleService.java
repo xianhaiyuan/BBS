@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lny.bbs.pojo.Article;
 import com.lny.bbs.pojo.ArticleVo;
+import com.lny.bbs.pojo.StarArticle;
 import com.lny.bbs.pojo.pageQueryVo;
 
 public interface ArticleService {
@@ -22,7 +23,7 @@ public interface ArticleService {
 
 	Integer getArticleCountByStar(Integer uid);
 
-	List<Article> getArticlePageByStar(pageQueryVo pageQueryVo, Integer uid);
+	List<StarArticle> getArticlePageByStar(pageQueryVo pageQueryVo, Integer uid);
 
 	Integer removeArticleByStar(Integer uid, Integer aid);
 
@@ -30,6 +31,10 @@ public interface ArticleService {
 
 	ArticleVo getArticleBySidAid(Integer sid, Integer aid);
 
-	Integer addArticleStar(Integer uid, Integer aid);
+	Integer addArticleStar(Integer uid, Integer aid, String date);
+
+	Integer changeArticlePraise(Integer id);
+
+	Integer changeArticleBlame(Integer id);
 
 }

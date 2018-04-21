@@ -16,6 +16,8 @@ public class ArticleVo implements Serializable {
 	private String title;
 	private String grade;
 	private Integer article_count;
+	private Integer praise;
+	private Integer blame;
 	public Integer getId() {
 		return id;
 	}
@@ -69,5 +71,17 @@ public class ArticleVo implements Serializable {
 	}
 	public void setArticle_count(Integer article_count) {
 		this.article_count = article_count;
+	}
+	public Integer getPraise() {
+		return praise;
+	}
+	public void setPraise(Integer praise) {
+		this.praise = praise;
+	}
+	public Integer getBlame() {
+		return blame;
+	}
+	public void setBlame(Integer blame) {
+		this.blame = blame;
 	}
 }
