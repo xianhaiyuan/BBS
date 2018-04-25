@@ -11,7 +11,7 @@ public class pageQueryVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer startIndex = 0;
-	private Integer pageSize = 2;
+	private Integer pageSize = 8;
 	public Integer getPageSize() {
 		return pageSize;
 	}

@@ -22,6 +22,7 @@ public class CommentVo implements Serializable {
 	private String title;
 	private String grade;
 	private Integer article_count;
+	private String avatar;
 	public Integer getId() {
 		return id;
 	}
@@ -108,6 +109,12 @@ public class CommentVo implements Serializable {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 }

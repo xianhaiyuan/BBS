@@ -59,7 +59,7 @@
 	</insert>
 	<select id="selectArticleBySidAid" resultType="articleVo">
 		select a.id,a.content,a.uid,a.date,a.author,a.art_label,a.title,a.praise,a.blame,
-		u.grade,u.article_count from bbs_article a left join bbs_user u on
+		u.grade,u.avatar,u.article_count from bbs_article a left join bbs_user u on
 		a.uid = u.id where a.id = #{1} and a.sid = #{0}
 	</select>
 	<insert id="insertArticleStar">

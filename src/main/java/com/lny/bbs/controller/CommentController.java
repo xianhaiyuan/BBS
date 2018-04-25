@@ -28,14 +28,14 @@ public class CommentController {
 	@RequestMapping(value="/commentPageByAid/get",method= {RequestMethod.GET})
 	public @ResponseBody PageBean<CommentVo> commentPageByAid(Integer aid, Integer currentPage){
 		commentPageService.setPageBeanTotalCount(commentService.getCommentCountByAid(aid));
-		commentPageService.initCommentPageQueryVo(currentPage,2);
+		commentPageService.initCommentPageQueryVo(currentPage,8);
 		commentPageService.setPageBeanData(commentService.getCommentPageByAid(commentPageService.getPageQueryVo(),aid));
 		return commentPageService.getPageBean();
 	}
 	@RequestMapping(value="/commentPageByUid/get",method= {RequestMethod.GET})
 	public @ResponseBody PageBean<CommentVo> commentPageByUid(Integer uid, Integer currentPage){
 		commentPageService.setPageBeanTotalCount(commentService.getCommentCountByUid(uid));
-		commentPageService.initCommentPageQueryVo(currentPage,2);
+		commentPageService.initCommentPageQueryVo(currentPage,8);
 		commentPageService.setPageBeanData(commentService.getCommentPageByUid(commentPageService.getPageQueryVo(),uid));
 		return commentPageService.getPageBean();
 	}

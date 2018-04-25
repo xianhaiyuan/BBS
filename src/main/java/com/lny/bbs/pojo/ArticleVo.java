@@ -12,6 +12,7 @@ public class ArticleVo implements Serializable {
 	private Integer uid;
 	private String date;
 	private String author;
+	private String avatar;
 	private String art_label;
 	private String title;
 	private String grade;
@@ -83,5 +84,11 @@ public class ArticleVo implements Serializable {
 	}
 	public void setBlame(Integer blame) {
 		this.blame = blame;
+	}
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 }

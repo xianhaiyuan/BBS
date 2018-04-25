@@ -30,7 +30,7 @@
 	</select>
 	<select id="selectCommentPageByAid" parameterType="pageQueryVo" resultType="commentVo">
 		select c.id,c.comment,c.date,c.author,c.uid,c.aid,c.sid,c.praise,c.blame,
-		c.from_content,c.from_nickname,u.grade,u.article_count,a.title
+		c.from_content,c.from_nickname,u.grade,u.article_count,u.avatar,a.title
 		from bbs_article a,bbs_comment c left join bbs_user u on c.uid = u.id
 		 where c.aid = #{aid} and c.aid = a.id
 		order by date asc

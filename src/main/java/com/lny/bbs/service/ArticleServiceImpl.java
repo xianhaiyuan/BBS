@@ -80,5 +80,4 @@ public class ArticleServiceImpl implements ArticleService {
 	public Integer changeArticleBlame(Integer id) {
 		return articleMapper.updateArticleBlame(id);
 	}
-
 }

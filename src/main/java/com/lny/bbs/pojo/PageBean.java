@@ -14,7 +14,7 @@ public class PageBean<T> implements Serializable {
 	//当前页
 	private Integer currentPage = 1;
 	//每页多少条
-	private Integer pageSize = 2;
+	private Integer pageSize = 8;
 	//总条数
 	private Integer totalCount;
 	//每页显示的数据
