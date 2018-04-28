@@ -6,6 +6,7 @@
 	</select>
 	<select id="selectArticlePageBySid" parameterType="pageQueryVo" resultType="article">
 		select * from bbs_article where sid = #{sid}
+		order by date desc
 		limit #{pageQueryVo.startIndex},#{pageQueryVo.pageSize}
 	</select>
 	<delete id="deleteArticleById" parameterType="article">

@@ -18,11 +18,10 @@
 		</collection>
 	</resultMap>
 	<select id="selectAllSection" resultMap="selectAllSectionMap">
-		select
-		s.id,s.sec_name,s.sec_label,s.uid,
-		a.id aid,a.content,a.uid,a.date,a.author,a.art_label,a.sid,a.reply_count,a.title
-		from bbs_section s left join bbs_article a on s.id = a.sid
-		order by art_label desc,date desc
+	select a.* from 
+	(select t1.id aid,t1.title,t1.art_label,t1.sid,t1.date,t2.*,(select count(*)+1 from bbs_article where sid = t1.sid and id > t1.id)
+	as group_id from bbs_article t1,bbs_section t2 order by t1.art_label desc) a
+	where a.group_id &lt;= 8 and a.sid = a.id
 	</select>
  	<select id="selectSectionPage" parameterType="pageQueryVo" resultType="section">
 		select * from bbs_section limit #{startIndex},#{pageSize}
