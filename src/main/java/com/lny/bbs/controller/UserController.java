@@ -57,7 +57,7 @@ public class UserController {
 			user.setId(-1);
 			return user;
 		}
-		String picDirectory = "C:\\Users\\Administrator\\Desktop\\vuejs学习\\lny_bbs\\static\\avatar\\";
+		String picDirectory = "C:\\lny_bbs\\static\\avatar\\";
 		String[] oldFileNameArr = user.getAvatar().split("/");
 		String oldFileName = oldFileNameArr[oldFileNameArr.length-1];
 		File oldFile = new File(picDirectory + oldFileName);
